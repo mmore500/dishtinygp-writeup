@@ -1,58 +1,59 @@
 \section{Methods}
 
-In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cell-like organisms evolved parameters for manually designed strategies controlling relevant aspects of behavior including resource-sharing, reproductive decision-making, and apoptosis.
-We will first cover the design of the DISHTINY platform then move on to describe the simple cell-like organisms we used to evaluate the platform.
+In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cell-like organisms evolved parameters to control manually-designed strategies such as resource-sharing, reproductive decision-making, and apoptosis.
+We will first cover the design of the DISHTINY platform and then describe the simple cell-like organisms we used to evaluate the platform.
 
 \subsection{DISHTINY}
 
 \input{fig/explanatory.tex}
 
-DISHTINY centers around cell-like organisms distributed over a toroidal grid.
-Over discrete timesteps called ``updates,'' the cell-like organisms collect a single continuous-valued resource.
-Once sufficient resource has been accrued, cell-level organisms may pay a cost of $-8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e. reproduce).
-Any cell-level organism existing on that adjoining tile is destroyed and replaced with the daughter cell.
+DISHTINY allows cell-like organisms to replicate across a toroidal grid.
+Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
+Once sufficient resource has been accrued, cells may pay $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
+As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or force offspring to create a new cooperating ``signaling channel'' group.
 
-As shown at the top of Figure \ref{fig:explanatory}, resources appear in diamond-shaped waves that emanate from a single point.
-With each simulation update, the resource wave advances one grid tile outward, disappearing when it reaches a predefined limit.
-In order to collect resource as it passes overhead, cell-level organisms must enter an activated state from their resting ready state.
-The cell-like organism at the starting position of a resource wave is automatically set to the activated state from the ready state.
-At the next update, this activated cell-like organism automatically induces neighboring cell-like organisms registered to the same signaling channel to enter the activated state and itself transitions to a temporary quiescent state.
-Subsequently, the newly activated cell-like organisms activate ready neighbors registered to the same signaling channel and themselves enter a temporary quiescent state.
-In this manner, cells sharing the same signaling channel activate coincident with the expanding resource wave.
-As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell-level organism is determined by the size and shape of of its same-channel signaling network;
-small or fragmented same-channel signaling networks will frequently miss out on resource as it passes overhead.
+As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point then spread outwards update-by-update in a diamond-shaped wave, disappearing when the expanding wave reaches a predefined limit.
+Cells must be in a costly ``activated'' state to collect resource as it passes.
+The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel.
+The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.
+Neighbors registered to other signaling channels do not activate.
+Each cell, after sending the activation signal, enters a temporary quiescent state so as not to reactivate from the signal.
+In this manner, cells sharing a signaling channel activate in concert with the expanding resource wave.
+As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
+small or fragmented same-channel signaling networks will frequently miss out on resource as it passes by.
 
-Each cell-like organism pays a resource cost when it enters the activated state.
-This cost is outweighed by the resource collected such that cell-like organisms which activate in concert with a resource wave derive a net benefit.
+Each cell pays a resource cost when it activates.
+This cost is outweighed by the resource collected such that cells that activate in concert with a resource wave derive a net benefit.
 Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
 Cells that frequently activate erroneously use up their resource and die.
 In our implementation, organisms that accrue a resource debt of $-11$ or greater are killed.
-This scenario is depicted in Figure \ref{fig:explanatory}$c$.
+This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
-In this manner, ``Goldilocks'' --- not to small and not too big --- same-channel signaling networks are selected for.
-In our implementation, resource waves are seeded at a single location drawn  with uniform probability from the toroidal grid.
-Based on this location, resource wave seeds are tiled over the toroidal grid such that their limits touch but do not overlap.
-All waves start and are updated synchronously;
-when they complete, the next batch of resource waves is seeded.
+In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
+Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that the extents of the resource waves touch, but do not overlap.
+All waves start and proceed synchronously;
+when they complete, the next resource waves are seeded.
 This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
 
-Cell-level organisms may control the size and shape of their same-channel signaling group by strategic control of reproduction.
-Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or should instead be registered to a random channel ID (int the range 1 to $2^{22}$).
+Cells control the size and shape of their same-channel signaling group through strategic reproduction.
+Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{22}$).
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
-Hierarchical levels are introduced into the system through multiple instantiations of this resource wave/channel-signaling scheme.
-In our experiments, we worked with two resource wave/channel-signaling levels, identified here as level zero and level one.
-On level zero, resource waves extended a radius of four toroidal tiles.
-On level one they extended a radius of twelve toroidal tiles.
-On both levels, activated organisms netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
-Due to the different radii of resource waves on different levels, level zero selects for smaller same-channel signaling networks and level one selects for larger same-channel signaling networks.
+Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
+We refer to each independent resource wave/channel-signaling system as a ``level.''
+In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
+On level one, resource waves extended a radius of three toroidal tiles.
+On level two they extended a radius of 24 toroidal tiles.
+On both levels, activated cells netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
+Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
-We enforced hierarchical nesting of these same-channel signaling networks during reproduction:
-daughter cells may inherit neither channel ID, just the level-one channel ID, or both channel IDs.
-Daughter cells may not inherit only the level-zero channel ID while having a different level-one channel ID.
-The distribution of IDs across the level-one and level-zero channels can be envisioned by analogy to political countries and territories.
-Each country (i.e. level-one channel network) may have one or many territories (i.e. level-zero channel network).
+Cells were marked with two separate channel IDs, one for level one and another for level two.
+We enforced hierarchical nesting of same-channel signaling networks during reproduction:
+daughter cells may inherit neither channel ID, just the level-two channel ID, or both channel IDs.
+Daughter cells may not inherit only the level-one channel ID while having a different level-two channel ID.
+The distribution of IDs across the level-two and level-one channels can be envisioned by analogy to political countries and territories.
+Each country (i.e., level-two channel network) may have one or many territories (i.e., level-one channel network).
 However, no territory spans more than one country.
 Figure \ref{fig:outcome_grids} depicts hierarchically nested channel states at the end of three evolutionary runs.
 
@@ -61,11 +62,12 @@ Because common channel IDs may only arise systematically through inheritance, co
 Because new channel IDs arise first in a single cell, same-channel signaling networks are reproductively bottlenecked, ensuring meaningful reproductive lineages at the level of the same-channel signaling network.
 To recognize an evolutionary transition in individuality, we therefore evaluate
 \begin{enumerate}
-\item Do cell-level organisms with the same channel ID choose to share resources (e.g. cooperate)?
-\item Is there division of reproductive labor between members of the same channel (e.g., do cell-level organisms at the interior of a network cede reproduction to those at the periphery?)
+\item Do cells with the same channel ID choose to share resources (e.g., cooperate)?
+\item Is there division of reproductive labor between members of the same channel (e.g., do cells at the interior of a network cede reproduction to those at the periphery?)
 \end{enumerate}
-If these conditions are met among cell-level organisms sharing the same level-zero channel, we can conclude that a zeroth-level transition in individuality has occurred.
-Likewise, if these conditions are met among cell-level organisms sharing the same level-one channel, we can conclude that a first-level transition in individuality has occurred.
+If these conditions are met among cells sharing the same level-one channel, a first-level transition in individuality may have occurred.
+Likewise, if these conditions are met among cells sharing the same level-two channel, a second-level transition in individuality may have occurred.
+In either case, observation of altruistic behavior, such as an apoptosis response to mutation, would further evidence a transition.
 
 \subsection{Organisms}
 
@@ -118,7 +120,7 @@ Otherwise, the four possible sites for offspring placement are considered in a r
 These parameters were included to enable more precise control of reproductive behavior.
 Initialization and mutation are performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-\subsection{Experiments}
+\subsection{Treatments}
 
 We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY platform environment.
 We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
@@ -133,4 +135,5 @@ We performed 191 replications of this experiment, each taking approximately 6 ho
 
 \subsection{Implementation}
 
-We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.  The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/ewvg8/}.
+We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
+The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/g58xk/}.
