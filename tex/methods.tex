@@ -73,65 +73,85 @@ In either case, observation of altruistic behavior, such as an apoptosis respons
 
 \include{fig/signalgp-dishtinygp}
 
-We performed our experiments using cell-level organisms comprised of a set of 15 floating-point parameters, each controlling a specific lifestyle strategy component.
+We performed our experiments using cell-level organisms based on SignalGP.
 These cell-level organisms are in no way inherent to the DISHTINY platform, but were merely developed to study the platform.
-On reproduction, mutation was applied to each parameter independently with probability $0.00005$.
 
-The altruism parameters ($A_0$ and $A_1$) control the probability that an organism declines to replace an adjoining organism that shares the same level-zero ($A_0$) or level-one ($A_1$) channel ID with their offspring.
-Mutation is performed by a redraw from the uniform distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
+In order to ensure symmetry
+unlike previous work on grid-based cooperation
 
-Resource allocation is controlled by the $P_{c}$, $P_0$, and $P_1$ parameters.
-The $P_{c}$ parameter controls the proportion of resource collected into and paid from a cell's individual resource stockpile, while the $P_0$ and $P_1$ parameters, respectively, control the proportion of resources going into and out of resource pools shared by organisms with identical level-zero and level-one channel IDs.
-These parameters are initialized by a draw from $U(0.0, 1.0)$ and mutated by addition of a normal value drawn from $N(0.0,0.2)$ with the result clamped to the range $[0,1]$.
-The set $P_{c}, P_0, P_1$ is always normalized to sum to 1.
+A combination of event-driven and procedural sensing.
 
-Channel resource pools are identical to an organism's individual stockpile, except that any deficit is distributed evenly among the individual organism's stockpile.
-On every update, cell-level organisms can spend from their individual stockpile to reproduce or from a channel pool, with priority given to cell-level organisms nearest to the centroid of that pool's members.
-As such, pool-funded reproduction fills in a same-channel signaling network from the inside out and can result in diamond-shaped same-channel signaling networks.
-(Distance is measured using the taxicab metric.)
+\subsection{Instruction Library}
 
-Channel caps $C_0$ and $C_1$ limit the size of same-channel signaling networks.
-When an organism reproduces, it checks the size of its level-zero signaling network against $C_0$ and the size of its level-one signaling group against $C_1$.
-If neither cap is met or exceeded, then the organism will produce an offspring sharing both of its channel IDs.
-If only the $C_0$ cap is exceeded, then the organism will produce an offspring with new level-zero channel ID but identical level-one channel ID.
-Finally, if the $C_1$ cap is exceeded, then the organism will produce an offspring with new IDs for both channels.
-These parameters are initialized by a draw from $U(0.0, 48.0)$ and mutated by addition of a value drawn from $N(0.0,24.0)$ with the result clamped to be non-negative.
+generic instructions in the default SignalGP instruction set (cite).
 
-The endowment parameters $E_{c}$, $E_0$, and $E_1$ control the amount of resource provided to offspring.
-This endowment is paid as an additional cost by the cell stockpile (or same-channel resource pool) funding a reproduction.
-The full amount of the received endowment is divided between the daughter cell's stockpile, level-zero same-channel resource pool, and level-one same-channel resource pool according to the offspring's parameters $P_{c}$, $P_0$, and $P_1$.
-Specifically, $E_{c}$ is the endowment amount paid to an offspring that shares both channel IDs of the parent;
-$E_0$ is the endowment paid to an offspring that shares just the level-one channel ID of the parent;
-and $E_1$ is the endowment paid to an offspring that shares neither the level-zero nor level-one channel ID of the parent.
-Endowed resources help new-channel propagules to rapidly grow their signaling network in order to begin collecting resource at a rate competitive to other well-established same-channel signaling networks.
-These parameters are initialized by a draw from $U(0.0, 3.0)$ and are mutated by addition of a value drawn from $N(0.0,10.0)$ with the result clamped to be non-negative.
+\begin{itemize}
+\item Rng
+\item SendMsgInternal
+\item BcstMsgInternal
+\item SetStockpileReserve
+\item PauseRepr-Lev
+\item PauseRepr
+\item ActivateInbox
+\item DeactivateInbox
+\item SendBigFracResource
+\item SendSmallFracResource
+\item SetAcceptSharingTrue
+\item SetAcceptSharingFalse
+\item SendMsgExternal
+\item BcstMsgExternal
+\item TryReproduceLev
+\item IncrCellAge-Lev
+\item DoApoptosisComplete
+\item DoApoptosisPartial
+\item SetHeir
+\item UnsetHeir
+\item QueryOwnStockpile
+\item QueryChannelGen-Lev
+\item QueryIsLive
+\item QueryIsOccupied
+\item QueryIsCellChild
+\item queryIsCellParent
+\item QueryChannelMate-Lev
+\item QueryIsPropaguleChild
+\item QueryIsPropaguleParent
+\item QueryChannel-Lev
+\item QueryStockpile
+\end{itemize}
 
-Parameters $M_{c}$, $M_0$, and $M_1$ control the attempt of suicide on genetic damage.
-Each time that a mutation occurs during reproduction, the mutated offspring attempts suicide with probability $M_{c}$ if it shares both channel IDs of its parent, probability $M_0$ if it shares just the level-one channel ID of its parent, and probability $M_1$ if it shares neither channel ID of the parent.
-The $M_x$ value applied is from the offspring's genotype after mutation.
-Attempted suicide succeeds 80\% of the time.
-This capacity enables zeroth- or first-level individuals to combat somatic mutation.
-Initialization and mutation each of these parameters is performed by a redraw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
 
-Finally, parameters $S_0$ and $S_1$ affect offspring placement.
-If an organism is placing an offspring with identical channel IDs, with probability $S_0$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-zero signaling network.
-If an organism is placing an offspring with identical level-one channel ID but different level-zero channel ID, with probability $S_1$ the four possible sites for offspring placement are considered in order of increasing distance from the centroid of the parent's level-one same-channel signaling network.
-Otherwise, the four possible sites for offspring placement are considered in a random order.
-These parameters were included to enable more precise control of reproductive behavior.
-Initialization and mutation are performed by a draw from the distribution $U(-0.5,1.5)$ clamped to the range $[0,1]$.
+\subsection{Event Library}
+
+\begin{itemize}
+\item OnUpdate
+\item CellChild
+\item NegativeResource
+\item ChannelMatchLev
+\item PropaguleChild
+\end{itemize}
+
+Instruction set
+
+Signals
 
 \subsection{Treatments}
 
-We performed experiments to assess the evolutionary trajectories of populations in the DISHTINY platform environment.
-We seeded each tile on the $120 \times 120$ toroidal grid with a randomized organism and ran the simulation for 20 million updates.
-We performed 33 replications of this experiment, each taking approximately 60 hours.
-Across all successive 10,000 update segments of all replicates, the mean number of cellular generations elapsed per 10,000 updates was 11.3 with a standard deviation of 1.9 cellular generations per 10,000 updates.
+Three experimental parameters:
+\begin{enumerate}
+\item hierarchy (and wave size)
+\item resource distribution (wave vs even)
+\item recognize/sense channels (as proxy for kin)
+\end{enumerate}
 
-We observed evolutionary outcomes that resembled cell-, zeroth-, and first-level individuality.
-To assess the relative fitness of these evolved organisms, we ran ecological competitions between three genotypes --- one selected as the most common genotype from the evolutionary run where the greatest mean $P_{c}$ was observed, one selected as the most common genotype from the evolutionary run where the greatest mean $P_0$ was observed, and the other selected as the most common genotype from the evolutionary run where the greatest mean $P_1$ was observed.
-We seeded each ecological run with three copies of each genotype, uniformly spaced over the $120 \times 120$ toroidal grid with random arrangement.
-We ran these competitions for 2 million updates with mutation disabled.
-We performed 191 replications of this experiment, each taking approximately 6 hours.
+We performed six treatments with these combinations of experimental parameters
+\begin{enumerate}
+\item treat=resource-even\_channelsense-no\_nlev-two
+\item treat=resource-wave\_channelsense-no\_nlev-two
+\item treat=resource-wave\_channelsense-yes\_nlev-onesmall
+\item treat=resource-even\_channelsense-yes\_nlev-two
+\item treat=resource-wave\_channelsense-yes\_nlev-onebig
+\item treat=resource-wave\_channelsense-yes\_nlev-two
+\end{enumerate}
 
 \subsection{Implementation}
 
