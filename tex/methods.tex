@@ -73,7 +73,7 @@ In either case, observation of altruistic behavior, such as an apoptosis respons
 
 \include{fig/signalgp-dishtinygp}
 
-We performed our experiments using cell-level organisms based on SignalGP.
+We performed our experiments using cell-level organisms based on SignalGP \cite{lalejini2018evolving}.
 These cell-level organisms are in no way inherent to the DISHTINY platform, but were merely developed to study the platform.
 
 In order to ensure symmetry
@@ -83,51 +83,45 @@ A combination of event-driven and procedural sensing.
 
 \subsection{Instruction Library}
 
-generic instructions in the default SignalGP instruction set (cite).
+generic instructions in the default SignalGP instruction set \cite{lalejini2018evolving}.
 
 \begin{itemize}
-\item Rng
-\item SendMsgInternal
-\item BcstMsgInternal
-\item SetStockpileReserve
-\item PauseRepr-Lev
-\item PauseRepr
-\item ActivateInbox
-\item DeactivateInbox
-\item SendBigFracResource
-\item SendSmallFracResource
-\item SetAcceptSharingTrue
-\item SetAcceptSharingFalse
-\item SendMsgExternal
-\item BcstMsgExternal
-\item TryReproduceLev
-\item IncrCellAge-Lev
-\item DoApoptosisComplete
-\item DoApoptosisPartial
-\item SetHeir
-\item UnsetHeir
-\item QueryOwnStockpile
-\item QueryChannelGen-Lev
-\item QueryIsLive
-\item QueryIsOccupied
-\item QueryIsCellChild
-\item queryIsCellParent
-\item QueryChannelMate-Lev
-\item QueryIsPropaguleChild
-\item QueryIsPropaguleParent
-\item QueryChannel-Lev
-\item QueryStockpile
+\item \textbf{RNG Draw} Draw a random value between 0.0 and 1.0 from onboard random number generator and store result in register.
+\item \textbf{Send/Broadcast Intracellular Message}
+\item \textbf{Set Stockpile Reserve} sharing only
+\item \textbf{Pause Reproduction} instance facing PauseRepr-Lev PauseRepr
+\item \textbf{Activate/Deactivate Intercellular Inbox} ActivateInbox; at cell birth, begins in the de-activated state
+\item \textbf{Deactivate Intracellular Inbox}  DeactivateInbox
+\item \textbf{Share Resource} large (0.5) and small (0.05) modulated by argument
+\item \textbf{Accept/Decline Sharing} accept sharing on cell birth
+\item \textbf{Send/Broadcast Intercellular Message}
+\item \textbf{Reproduce} try (resource, pause reproduction), lev, channel age
+\item \textbf{Increase Channel Age} defined per level
+\item \textbf{Apoptosis} partial and complete
+\item \textbf{Designate/Revoke Heir} apoptosis 80\% of repduction cost and own stockpile amount
+\item \textbf{Query Own Stockpile}
+\item \textbf{Query Own Channel Age} -Lev
+\item \textbf{Query Is Neighbor Live}
+\item \textbf{Query Is Neighbor Channel Occupied}
+\item \textbf{Query Is Neighbor My Cellular Child}
+\item \textbf{Query Is Neighbor My Cellular Parent}
+\item \textbf{Query Does Neighbor's Channel ID Match Mine} defined per level
+\item \textbf{Query Does Neighbor's Channel ID Descend From Mine} defined for top level e.g., is neighbor my propagule
+\item \textbf{Query Does My Channel ID Descend From Neighbor's} defined for top level level e.g., am I neighbor's propagule
+\item \textbf{Query Neighbor's Channel ID}
+\item \textbf{Query Neighbor's Stockpile}
 \end{itemize}
 
 
 \subsection{Event Library}
 
 \begin{itemize}
-\item OnUpdate
-\item CellChild
-\item NegativeResource
-\item ChannelMatchLev
-\item PropaguleChild
+\item \textbf{On Update}
+\item \textbf{Facing Cellular Child}
+\item \textbf{Stockpile Debt} negative resource
+\item \textbf{Neighbor's Channel ID Matches Mine} defined per level
+\item \textbf{Neighbor's Channel ID Descends From Mine} top level
+e.g., is neighbor my propagule
 \end{itemize}
 
 Instruction set
