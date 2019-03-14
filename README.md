@@ -1,9 +1,9 @@
-## ALife 2018 Writeup
+## ALife 2019 Writeup
 
-Writeup of major transitions work for ALife 2018.
+Writeup of major transitions work for ALife 2019.
 
 ### Authorship
 
 Matthew Andres Moreno
 
-`matthew.andres.moreno@gmail.com`
+`m.more5000@gmail.com`
