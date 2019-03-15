@@ -37,8 +37,13 @@ when they complete, the next resource waves are seeded.
 This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
 
 Cells control the size and shape of their same-channel signaling group through strategic reproduction.
-Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{22}$).
+Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{64}$).
+The probability of channel collision is miniscule: $60 \times 60 \times 50100$ (the grid dimensions times the number of simulation updates) independent channel values will only collide with probability $1 \times 10^{-11}$.
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
+
+To ensure turnover of channel groups, a channel generation limit is enforced.
+Each time a cell spawns a daughter cell sharing the same channel, the parent's channel generation counter is incremented and the daughter cell's channel generation counter is then initialized to match their  parent's counter.
+Once the channel generation counter reaches a limit, in this implementation defined as the resource wave radius, daughter cells may no longer be endowed with the parent's Channel ID; a new, randomly-drawn Channel ID is assigned to daughter cells instead.
 
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
