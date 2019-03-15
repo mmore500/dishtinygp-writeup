@@ -43,7 +43,7 @@ No guarantees are made about the uniqueness of a newly-generated channel ID, but
 
 To ensure turnover of channel groups, a channel generation limit is enforced.
 Each time a cell spawns a daughter cell sharing the same channel, the parent's channel generation counter is incremented and the daughter cell's channel generation counter is then initialized to match their  parent's counter.
-Once the channel generation counter reaches a limit, in this implementation defined as the resource wave radius, daughter cells may no longer be endowed with the parent's Channel ID; a new, randomly-drawn Channel ID is assigned to daughter cells instead.
+Once the channel generation counter reaches a limit, in this implementation defined as the resource wave radius, daughter cells may no longer be endowed with the parent's channel ID; a new, randomly-drawn channel ID is assigned to daughter cells instead.
 
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
