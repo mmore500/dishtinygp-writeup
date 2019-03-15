@@ -47,9 +47,9 @@ Once the channel generation counter reaches a limit, in this implementation defi
 
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
-In our experiments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
-On level one, resource waves extended a radius of three toroidal tiles.
-On level two they extended a radius of 24 toroidal tiles.
+In some experimental treatments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
+On level one, resource waves extended a radius of four toroidal tiles.
+On level two they extended a radius of 12 toroidal tiles.
 On both levels, activated cells netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
@@ -200,21 +200,30 @@ This event allows a querying cell to sense whether its neighbor is a member of a
 
 \subsection{Treatments}
 
-Three experimental parameters:
+In this work, we explore three experimental parameters:
 \begin{enumerate}
-\item hierarchy (and wave size)
-\item resource distribution (wave vs even)
-\item recognize/sense channels (as proxy for kin)
+\item dual versus single hierarchical resource wave/channel-signaling levels,
+\item wave-based versus uniform resource distribution, and
+\begin{itemize}
+\item For the uniform resource distribution treatment, irrespective of channel ID each cell receives an identical amount of resource chosen to approximately match the inflow rate of the dual-level wave-based scheme.
+\end{itemize}
+\item enabled versus disabled channel-sensing events/instructions.
+\begin{itemize}
+\item For the disabled channel-sensing treatment, all channel-sensing instructions perform no operation and all channel-sensing events are never triggered.
+\end{itemize}
 \end{enumerate}
 
-We performed six treatments with these combinations of experimental parameters
+The first experimental parameter explores the implications of resource wave size and hierarchical nesting in the DISHTINY model.
+The second and third parameters aim to untangle the effects of channel ID with respect to the resource collection task and with respect to kin recognition.
+
+We mix-and match these experimental parameters in six treatments:
 \begin{enumerate}
-\item treat=resource-even\_channelsense-no\_nlev-two
-\item treat=resource-wave\_channelsense-no\_nlev-two
-\item treat=resource-wave\_channelsense-yes\_nlev-onesmall
-\item treat=resource-even\_channelsense-yes\_nlev-two
-\item treat=resource-wave\_channelsense-yes\_nlev-onebig
-\item treat=resource-wave\_channelsense-yes\_nlev-two
+\item two levels, wave-based resource, enabled channel-sensing (``standard''),
+\item two levels, even resource, enabled channel-sensing (``even''),
+\item two levels, wave-based resource, disabled channel-sensing (``blind''),
+\item two levels, even resource, disabled channel-sensing (``even+blind''),
+\item one level with wave radius four, wave-based resource, enabled channel-sensing (``small wave''), and
+\item one level with wave radius twelve, wave-based resource, enabled channel-sensing (``large wave'').
 \end{enumerate}
 
 \subsection{Implementation}
