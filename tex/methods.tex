@@ -9,7 +9,7 @@ We will first cover the design of the DISHTINY platform and then describe the si
 
 DISHTINY allows cell-like organisms to replicate across a toroidal grid.
 Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
-Once sufficient resource has been accrued, cells may pay $8.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
+Once sufficient resource has been accrued, cells may pay $3.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
 As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or force offspring to create a new cooperating ``signaling channel'' group.
 
 As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point then spread outwards update-by-update in a diamond-shaped wave, disappearing when the expanding wave reaches a predefined limit.
@@ -27,7 +27,7 @@ This cost is outweighed by the resource collected such that cells that activate 
 Recall, though, that resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
 Cells that frequently activate erroneously use up their resource and die.
-In our implementation, organisms that accrue a resource debt of $-11$ or greater are killed.
+In our implementation, organisms that accrue a resource debt of $-5$ or greater are killed.
 This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
 In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
