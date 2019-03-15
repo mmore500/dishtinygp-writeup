@@ -88,50 +88,94 @@ A combination of event-driven and procedural sensing.
 
 \subsection{Instruction Library}
 
-generic instructions in the default SignalGP instruction set \cite{lalejini2018evolving}.
+In addition to the generic arithmetic, logic, and program flow instructions in the default SignalGP instruction set, which is detailed in \cite{lalejini2018evolving}, we define the following instructions.
+Instructions that involve an extracellular neighbor default to the cell that the executing SignalGP instance is facing, but may be modified by a register-based argument.
+Many instructions in the listing are provided in several variants, which are detailed in the accompanying description.
 
 \begin{itemize}
-\item \textbf{RNG Draw} Draw a random value between 0.0 and 1.0 from onboard random number generator and store result in register.
+\item \textbf{RNG Draw}
+Draw a random value between 0.0 and 1.0 from on board random number generator and store result in register.
 \item \textbf{Send/Broadcast Intracellular Message}
-\item \textbf{Set Stockpile Reserve} sharing only
-\item \textbf{Pause Reproduction} instance facing PauseRepr-Lev PauseRepr
-\item \textbf{Activate/Deactivate Intercellular Inbox} ActivateInbox; at cell birth, begins in the de-activated state
-\item \textbf{Deactivate Intracellular Inbox}  DeactivateInbox
-\item \textbf{Share Resource} large (0.5) and small (0.05) modulated by argument
-\item \textbf{Accept/Decline Sharing} accept sharing on cell birth
+Send a message to a single other SignalGP instance within the cell or to all SignalGP instances (except the executing instance) within the current cell.
+\item \textbf{Set Stockpile Reserve}
+Mark twice the amount of resource as ineligible for sharing.
+The amount may be modified by a register-based argument.
+\item \textbf{Activate/Deactivate Intercellular Inbox}
+Mark or unmark the intercellular inbox in a particular direction to refuse incoming messages.
+At cell birth, the inbox is deactivated.
+\item \textbf{Share Resource}
+Send a proportion of the cell's stockpiled resource to a neighboring cell.
+One instruction defaults to sending a large proportion of available resource (50\%) to the neighboring cell.
+A second instruction defaults to sending a small proportion of available resource (5\%) to the neighboring cell.
+The proportion of available resource can be adjusted by a register-based argument.
+\item \textbf{Accept/Decline Sharing}
+Mark the cell to decline resource sent by neighbors.
+Declined resource is retained by the sending cell (with no resource lost).
+Regardless of this instruction, cells with negative resource stockpiles automatically decline shared resource.
+At birth, the cell is marked to accept sharing.
 \item \textbf{Send/Broadcast Intercellular Message}
-\item \textbf{Reproduce} try (resource, pause reproduction), lev, channel age
-\item \textbf{Increase Channel Age} defined per level
-\item \textbf{Apoptosis} partial and complete
-\item \textbf{Designate/Revoke Heir} apoptosis 80\% of repduction cost and own stockpile amount
+Send a message to a single cellular neighbor or to all cellular neighbors.
+\item \textbf{Reproduce}
+Attempt to spawn a child cell in a particular direction, paid for out of the parent cell's resource stockpile.
+If sufficient resource is not available in the cell's stockpile, no resource is action is taken.
+Variants of this instruction are defined for each channel ID inheritance level: from endowing the daughter cell with the parental channel IDs across all levels, to endowing the daughter cell with a new level-one channel ID but the parent's level-two channel ID, to endowing the daughter cell with all-new channel IDs.
+If a channel generation counter limit has been reached, reproduction is simply attempted at the next highest level; even with channel generation counters maxed out, cells may generate offspring with all-new channel IDs.
+\item \textbf{Pause Reproduction}
+Pause cellular reproduction in a single direction for the remainder of the current update and for the entire next update.
+Variants of this instruction pause reproduction at a certain wave/channel-signaling level or across all channel ID inheritance levels.
+\item \textbf{Increase Channel Generation Counter}
+Increases the cell's channel generation counter by one.
+The amount the cell's generation counter is increased by can be adjusted by register-based argument.
+\item \textbf{Apoptosis}
+The cell is killed at the end of the current update.
+Two variants are defined.
+Under the conplete variant, the cell's channel ID partial and complete
+\item \textbf{Designate/Revoke Heir} apoptosis 80\% of reproduction cost and own stockpile amount
 \item \textbf{Query Own Stockpile}
-\item \textbf{Query Own Channel Age} -Lev
+Sets a designated register to the amount of resource present in the cell's stockpile.
+\item \textbf{Query Own Channel Generation Counter} -Lev
+This instruction sets a designated register to the value of the cell's channel generation counter.
+A variant of this instruction is provided for each wave/channel-signaling level.
 \item \textbf{Query Is Neighbor Live}
-\item \textbf{Query Is Neighbor Channel Occupied}
+This instruction sets a designated register to 1 if the neighboring tile contains a live cell and 0 otherwise.
+\item \textbf{Query Is Neighbor Channel Set}
+This instruction sets a designated register to 1 if the neighboring tile contains active channel IDs and 0 otherwise.
 \item \textbf{Query Is Neighbor My Cellular Child}
+This instruction sets a designated register to 1 if the neighboring cell is the daughter of the querying cell and 0 otherwise.
 \item \textbf{Query Is Neighbor My Cellular Parent}
-\item \textbf{Query Does Neighbor's Channel ID Match Mine} defined per level
-\item \textbf{Query Does Neighbor's Channel ID Descend From Mine} defined for top level e.g., is neighbor my propagule
-\item \textbf{Query Does My Channel ID Descend From Neighbor's} defined for top level level e.g., am I neighbor's propagule
+This instruction sets a designated register to 1 if the neighboring cell is the parent of the querying cell and 0 otherwise.
+\item \textbf{Query Does Neighbor's Channel ID Match Mine}
+This instruction sets a designated register to 1 if the neighboring cell has the same channel ID as the querying cell and 0 otherwise.
+A variant of this instruction is provided for each wave/channel-signaling level.
+\item \textbf{Query Does Neighbor's Channel ID Descend From Mine}
+This instruction sets a designated register to 1 if the neighboring cell's highest-level channel ID is different from the querying cell's highest-level channel ID, but is descended from the querying cell's channel ID.
+This instruction allows a querying cell to sense whether its neighbor is a member of a same-channel group that is a propagule of the querying cell's same-channel group.
+\item \textbf{Query Does My Channel ID Descend From Neighbor's}
+This instruction sets a designated register to 1 if the querying cell's highest-level channel ID is different from the neighboring cell's highest-level channel ID, but is descended from the neighboring cell's channel ID.
 \item \textbf{Query Neighbor's Channel ID}
+This instruction sets a designated register to the neighbor's channel ID.
 \item \textbf{Query Neighbor's Stockpile}
+This instruction sets a designated register to the amount of resource present in the neighbor's stockpile.
 \end{itemize}
-
 
 \subsection{Event Library}
 
+The activating affinity of each event is set at the outset of each experiment using a pseudo random number generator.
+
 \begin{itemize}
 \item \textbf{On Update}
+This event is triggered at the outset of each simulation update.
 \item \textbf{Facing Cellular Child}
-\item \textbf{Stockpile Debt} negative resource
+This event is triggered at the outset of an update if the SignalGP instance is facing a neighboring cell that is the querying cell's daughter.
+\item \textbf{Stockpile Debt}
+This event is triggered at the outset of an update if the amount of resource in a cell's stockpile is negative.
 \item \textbf{Neighbor's Channel ID Matches Mine} defined per level
-\item \textbf{Neighbor's Channel ID Descends From Mine} top level
-e.g., is neighbor my propagule
+This event is triggered at the outset of an update if a SignalGP instance is facing a neighbor cell that shares its channel ID.
+A different event is provided for each resource wave/channel-signaling level.
+\item \textbf{Neighbor's Channel ID Descends From Mine}
+This event is triggered at the outset of an update if the neighboring cell's highest-level channel ID is different from the querying cell's highest-level channel ID, but is descended from the querying cell's channel ID.
+This event allows a querying cell to sense whether its neighbor is a member of a same-channel group that is a propagule of the querying cell's same-channel group.
 \end{itemize}
-
-Instruction set
-
-Signals
 
 \subsection{Treatments}
 
