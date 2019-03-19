@@ -21,6 +21,10 @@ clean:
 	rm -f ${BUILD_DIR}.pdf
 	rm -f ${BUILD_DIR}-draft.pdf
 
+sview:
+	xdg-open ${BUILD_DIR}-draft.pdf 2>/dev/null
+
+
 cleaner:
 	latexmk -CA
 	# remove auxillary files, excepting .tex and .bib files
