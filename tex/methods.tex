@@ -157,21 +157,21 @@ Sets a designated register to the amount of resource present in the cell's stock
 \item \textbf{Query Own Channel Generation Counter} -Lev
 This instruction sets a designated register to the value of the cell's channel generation counter.
 A variant of this instruction is provided for each wave/channel-signaling level.
-\item \textbf{Query Is Neighbor Live}
+\item \textbf{Query ``Is Neighbor Live?''}
 This instruction sets a designated register to 1 if the neighboring tile contains a live cell and 0 otherwise.
-\item \textbf{Query Is Neighbor Channel Set}
+\item \textbf{Query ``Is Neighbor Channel Set?''}
 This instruction sets a designated register to 1 if the neighboring tile contains active channel IDs and 0 otherwise.
-\item \textbf{Query Is Neighbor My Cellular Child}
+\item \textbf{Query ``Is Neighbor My Cellular Child?''}
 This instruction sets a designated register to 1 if the neighboring cell is the daughter of the querying cell and 0 otherwise.
-\item \textbf{Query Is Neighbor My Cellular Parent}
+\item \textbf{Query ``Is Neighbor My Cellular Parent?''}
 This instruction sets a designated register to 1 if the neighboring cell is the parent of the querying cell and 0 otherwise.
-\item \textbf{Query Does Neighbor's Channel ID Match Mine}
+\item \textbf{Query ``Does Neighbor's Channel ID Match Mine?''}
 This instruction sets a designated register to 1 if the neighboring cell has the same channel ID as the querying cell and 0 otherwise.
 A variant of this instruction is provided for each wave/channel-signaling level.
-\item \textbf{Query Does Neighbor's Channel ID Descend From Mine}
+\item \textbf{Query ``Does Neighbor's Channel ID Descend From Mine?''}
 This instruction sets a designated register to 1 if the neighboring cell's highest-level channel ID is different from the querying cell's highest-level channel ID, but is descended from the querying cell's channel ID.
 This instruction allows a querying cell to sense whether its neighbor is a member of a same-channel group that is a propagule of the querying cell's same-channel group.
-\item \textbf{Query Does My Channel ID Descend From Neighbor's}
+\item \textbf{Query ``Does My Channel ID Descend From Neighbor's?''}
 This instruction sets a designated register to 1 if the querying cell's highest-level channel ID is different from the neighboring cell's highest-level channel ID, but is descended from the neighboring cell's channel ID.
 \item \textbf{Query Neighbor's Channel ID}
 This instruction sets a designated register to the neighbor's channel ID.
