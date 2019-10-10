@@ -27,15 +27,15 @@ Resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave collect no resource.
 A long quiescent period ensures that erroneously activated cells miss several subsequent opportunities to collect resource and therefore will tend to collect resource at a slower rate.
 This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
+In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks enjoy superior fitness.
 
-In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
-Based on a randomly chosen starting location, resource wave starting points (seeds) are tiled over the toroidal grid such that the extents of the resource waves touch, but do not overlap.
-All waves start and proceed synchronously;
+Resource wave starting points (seeds) are tiled over the toroidal grid from a randomly chosen starting location such that the extents of the resource waves do not overlap.
+All resource waves begin and proceed synchronously;
 when they complete, the next resource waves are seeded.
-This process ensures that selection for ``Goldilocks'' same-channel signaling networks is uniformly distributed over the toroidal grid.
+This process provides efficient and spatially-uniform selection for ``Goldilocks'' same-channel signaling networks.
 
 Cells control the size and shape of their same-channel signaling group through strategic reproduction.
-Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{64}$).
+Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{64} - 1$).
 The probability of channel collision is miniscule: $60 \times 60 \times 2^{20}$ (the grid dimensions times the number of simulation updates) independent channel values will collide with probability less than $1 \times 10^{-9}$.
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
 
@@ -47,26 +47,30 @@ On level two they extended a radius of six toroidal tiles.
 On both levels, activated cells netted $+0.25$ resource from a resource wave, but did not collect any resource outside the extent of the resource wave.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
-Cells were marked with two separate channel IDs, one for level one and another for level two.
-We enforced hierarchical nesting of same-channel signaling networks during reproduction:
-daughter cells may inherit neither channel ID, just the level-two channel ID, or both channel IDs.
-Daughter cells may not inherit only the level-one channel ID while having a different level-two channel ID.
-The distribution of IDs across the level-two and level-one channels can be envisioned by analogy to political countries and territories.
-Each country (i.e., level-two channel network) may have one or many territories (i.e., level-one channel network).
-However, no territory spans more than one country.
+Each cell contained a pair of separate channel IDs, the first for level one and the second for level two.
+We kept these channel IDs hierarchically nested by constraining inheritance during reproduction.
+Daughter cells could not inherit just the level-one channel ID, they could either
+\begin{enumerate}
+\item inherit both level-one and level-two channel ID,
+\item inherit level-two channel ID but not level-one channel ID, or
+\item inherit neither channel ID.
+\end{enumerate}
+Hierarchically nested channel IDs are analogous to a strict corporate organizational structure: all employees (i.e., cells) are members of one department (i.e., level-one channel network) and one corporation (i.e., level-two channel network) but no employee can be a member of two departments and no department can be a member of two corporations.
 Figure \ref{fig:outcome_grids} depicts hierarchically nested channel states at the end of three evolutionary runs.
 
-Channel IDs enable straightforward detection of an evolutionary transition in individuality.
-Because common channel IDs may only arise systematically through inheritance, common channel IDs indicate a close hereditary relationship in addition to a close cooperative relationship.
-Because new channel IDs arise first in a single cell, same-channel signaling networks are reproductively bottlenecked, ensuring meaningful reproductive lineages at the level of the same-channel signaling network.
-To recognize an evolutionary transition in individuality, we therefore evaluate
+An evolutionary transition in individuality can readily be evaluated within the DISHTINY framework with respect to same-channel network groups.
+In addition to a potentially functionally cooperative relationship, shared channel IDs --- which may only systematically arise through inheritance --- imply a close hereditary relationship.
+Because new channel IDs arise first in a single cell, same-channel signaling networks are reproductively bottlenecked analogously to a "Staying Together" life cycle (rather than a "Coming Together" life cycle) \cite{staps2019emergence}.
+This precludes chimeric groups, except for mutations arising from somatic reproduction and rare cases of channel ID collision.
+
+To recognize an evolutionary transition in individuality, we can evaluate
 \begin{enumerate}
-\item Do cells with the same channel ID choose to share resources (e.g., cooperate)?
-\item Is there division of reproductive labor between members of the same channel (e.g., do cells at the interior of a network cede reproduction to those at the periphery?)
+\item whether cells with the same channel ID cooperate altruistically by assessing, for example, resource sharing, and
+\item whether delegation of reproductive labor arises by assessing whether interior cells cede reproduction to those at the periphery.
 \end{enumerate}
-If these conditions are met among cells sharing the same level-one channel, a first-level transition in individuality may have occurred.
-Likewise, if these conditions are met among cells sharing the same level-two channel, a second-level transition in individuality may have occurred.
-In either case, observation of altruistic behavior, such as an apoptosis response to mutation, would further evidence a transition.
+If cells sharing the same level-one channel fulfill these conditions, we would suppose that a first-level transition in individuality had occurred.
+Likewise, if cells sharing the sharing the same level-two channel fulfill these conditions, we would suppose that a second-level transition in individuality had occurred.
+Further, we can screen for the evolution of complex multicellularity by assessing cell-cell messaging, regulatory patterning, and functional differentiation between cells within the a same-channel signaling network \cite{knoll2011multiple}.
 
 \subsection{Channel Group Life Cycle}
 
@@ -97,7 +101,7 @@ However, in some sense the aging scheme is heavy-handed, in effect enforcing rat
 The evolutionary basis of aging and mortality --- in particular, the possibility of intrinsic evolutionary adaptations promoting these phenomena in addition to extrinsic factors  --- remains an active topic of scientific discussion [lotsa citations TODO].
 In future work, we are interested in evaluating the outcomes of relaxing constraints of this aging scheme under different evolutionary conditions (such as cosmic ray mutations or irregular population structure) in light of theory attributing mortality and aging to evolvability, mutational accumulation, and costly somatic maintenance [lotsa citations TODO].
 
-\subsection{Organisms}
+\subsection{Cell-Level Organisms}
 
 \include{fig/signalgp-dishtinygp}
 
