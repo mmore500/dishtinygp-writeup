@@ -1,33 +1,31 @@
 \section{Methods}
 
-In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cell-like organisms evolved parameters to control manually-designed strategies such as resource-sharing, reproductive decision-making, and apoptosis.
-We will first cover the design of the DISHTINY platform and then describe the simple cell-like organisms we used to evaluate the platform.
+In order to demonstrate that the DISHTINY platform selects for detectable hierarchical transitions in individuality, we performed experiments where cells controlled by evolving genetic programs evolved open-ended behaviors to make decisions about resource sharing, reproductive timing, and apoptosis.
+We will first cover the design of the DISHTINY platform and then describe the cell-like organisms we used to evaluate the platform.
 
-\subsection{DISHTINY}
+\subsection{Resource Collection}
 
 \input{fig/explanatory.tex}
 
 DISHTINY allows cell-like organisms to replicate across a toroidal grid.
 Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
-Once sufficient resource has been accrued, cells may pay $3.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
-As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or force offspring to create a new cooperating ``signaling channel'' group.
+Once sufficient resource has been accrued, cells may pay $1.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
+Collected resource decays at a rate of 0.1\% per update, incentivizing its quick use.
+As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or expel offspring to found a new cooperating ``signaling channel'' group.
 
-As shown at the top of Figure \ref{fig:explanatory}, resources appear at a single point then spread outwards update-by-update in a diamond-shaped wave, disappearing when the expanding wave reaches a predefined limit.
-Cells must be in a costly ``activated'' state to collect resource as it passes.
-The cell at the starting position of a resource wave is automatically activated, and will send the activate signal to neighboring cells on the same signaling channel.
+As shown at the top of Figure \ref{fig:explanatory}, resource appears at a single point then spreads outwards update-by-update in a diamond-shaped wave. The expanding wave halts at a predefined limit.
+Cells must enter an ``activated'' state to harvest resource as it passes overhead.
+The cell at the starting position of a resource wave is automatically activated, and will propagate the activation signal to neighboring cells on the same signaling channel.
 The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.
 Neighbors registered to other signaling channels do not activate.
-Each cell, after sending the activation signal, enters a temporary quiescent state so as not to reactivate from the signal.
-In this manner, cells sharing a signaling channel activate in concert with the expanding resource wave.
+Each cell, after sending the activation signal, enters a temporary quiescent state.
+In this manner, cells sharing a signaling channel track and harvest an expanding resource wave.
 As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
 small or fragmented same-channel signaling networks will frequently miss out on resource as it passes by.
 
-Each cell pays a resource cost when it activates.
-This cost is outweighed by the resource collected such that cells that activate in concert with a resource wave derive a net benefit.
-Recall, though, that resource waves have a limited extent.
-Cells that activate outside the extent of a resource wave or activate out of sync with the resource wave (due to an indirect path from the cell that originated the signal) pay the activation cost but collect no resource.
-Cells that frequently activate erroneously use up their resource and die.
-In our implementation, organisms that accrue a resource debt of $-5$ or greater are killed.
+Resource waves have a limited extent.
+Cells that activate outside the extent of a resource wave collect no resource.
+A long quiescent period ensures that erroneously activated cells miss several subsequent opportunities to collect resource and therefore will tend to collect resource at a slower rate.
 This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
 
 In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks are selected for.
@@ -38,19 +36,15 @@ This process ensures that selection for ``Goldilocks'' same-channel signaling ne
 
 Cells control the size and shape of their same-channel signaling group through strategic reproduction.
 Three choices are afforded: whether to reproduce at all, where among the four adjoining tiles of the toroidal grid to place their offspring, and whether the offspring should be registered to the parent's signaling channel or be given a random channel ID (in the range 1 to $2^{64}$).
-The probability of channel collision is miniscule: $60 \times 60 \times 50100$ (the grid dimensions times the number of simulation updates) independent channel values will only collide with probability $1 \times 10^{-11}$.
+The probability of channel collision is miniscule: $60 \times 60 \times 2^{20}$ (the grid dimensions times the number of simulation updates) independent channel values will collide with probability less than $1 \times 10^{-9}$.
 No guarantees are made about the uniqueness of a newly-generated channel ID, but chance collisions are rare.
-
-To ensure turnover of channel groups, a channel generation limit is enforced.
-Each time a cell spawns a daughter cell sharing the same channel, the parent's channel generation counter is incremented and the daughter cell's channel generation counter is then initialized to match their  parent's counter.
-Once the channel generation counter reaches a limit, in this implementation defined as the resource wave radius, daughter cells may no longer be endowed with the parent's channel ID; a new, randomly-drawn channel ID is assigned to daughter cells instead.
 
 Hierarchical levels are introduced into the system through multiple separate, but overlaid, instantiations of this resource wave/channel-signaling scheme.
 We refer to each independent resource wave/channel-signaling system as a ``level.''
 In some experimental treatments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
-On level one, resource waves extended a radius of four toroidal tiles.
-On level two they extended a radius of 12 toroidal tiles.
-On both levels, activated cells netted $+1.0$ resource from a resource wave, but suffered an activation penalty of $-5.0$ if no resource was available.
+On level one, resource waves extended a radius of two toroidal tiles.
+On level two they extended a radius of six toroidal tiles.
+On both levels, activated cells netted $+0.25$ resource from a resource wave, but did not collect any resource outside the extent of the resource wave.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
 Cells were marked with two separate channel IDs, one for level one and another for level two.
@@ -74,6 +68,35 @@ If these conditions are met among cells sharing the same level-one channel, a fi
 Likewise, if these conditions are met among cells sharing the same level-two channel, a second-level transition in individuality may have occurred.
 In either case, observation of altruistic behavior, such as an apoptosis response to mutation, would further evidence a transition.
 
+\subsection{Channel Group Life Cycle}
+
+Mature same-channel resource collecting groups enjoy a considerable advantage over fledging propagules.
+Because of the isometric scaling relationship between surface area and perimeter, cooperative same-channel resource collecting groups can marshal more resource at their periphery.
+In addition, because of their greater surface area, mature same-channel resource collecting groups are able to seed resource-wave events and collect resource at a higher per-cell rate.
+
+In order to ensure channel group turnover and facilitate channel group propagation, we impose a timed phase-out of somatic reproduction and resource wave harvests.
+For each cell, we track a channel generation counter at each resource wave level.
+At the genesis of a new channel group, these counters are set to zero.
+Daughter cells that expand a channel group's soma are initialized to a counter value one greater than their parent.
+Additionally, all channel generation counters are incremented every 512 updates to ensure that soma ages even in the absence of reproduction.
+When a cell's channel generation counter reaches 1.5 times the wave radius of its level, it can no longer produce somatic daughter cells.
+Then, after two additional counter steps, cells lose their ability to seed resource wave events and collect resource.
+Thus, as channel groups age over time, their constituent cells lose the ability regenerate somatic tissue and then, soon after, to collect resource.
+To prevent complete stagnation in the case where all cells' channel generation counters expire, we provide a uniform inflow of resource sufficient for one reproduction approximately every thousand updates.
+
+Interaction between nested channel groups produces a notable selective byproduct.
+Because smaller, level-one channel groups tend to have intrinsically shorter lifespans, in order to achieve the full potential productive somatic lifespan of a larger, level-two channel group its constituent small channel groups must be intermittently regenerated.
+Otherwise, the soma's capacity to seed resource-wave events and to collect resource will be prematurely lost once its constituent smaller, level-one channel groups expire.
+
+This aging scheme's design ultimately stems from a desire
+\begin{enumerate}
+\item to facilitate evolution through regular turnover of emergent individuals and
+\item to scaffold workable propagation for primitive cellular strategies while furnishing opportunities for more sophisticated adaptations to the imposed life cycle constraints.
+\end{enumerate}
+However, in some sense the aging scheme is heavy-handed, in effect enforcing rather than enabling a birth-death life cycle.
+The evolutionary basis of aging and mortality --- in particular, the possibility of intrinsic evolutionary adaptations promoting these phenomena in addition to extrinsic factors  --- remains an active topic of scientific discussion [lotsa citations TODO].
+In future work, we are interested in evaluating the outcomes of relaxing constraints of this aging scheme under different evolutionary conditions (such as cosmic ray mutations or irregular population structure) in light of theory attributing mortality and aging to evolvability, mutational accumulation, and costly somatic maintenance [lotsa citations TODO].
+
 \subsection{Organisms}
 
 \include{fig/signalgp-dishtinygp}
@@ -82,40 +105,68 @@ We performed our experiments using cell-level digital organisms controlled by ev
 SignalGP is genetic programming framework designed around the event-driven programming paradigm \cite{lalejini2018evolving}.
 SignalGP programs are collections of independent procedural functions, each equipped with a bit-string tag.
 A function is triggered by a signal with affinity that maximally and sufficiently matches its tag.
-(A binding threshold of 0.5 was used in these experiments).
+(A binding threshold of 0.1 was used in these experiments).
 Signals may be generated by the environment, received as messages from other agents, or triggered internally by function execution.
-Signals, and the ensuing chains of procedural execution they give rise to, are processed pseudo-concurrently by sixteen virtual CPUs.
-Fifty virtual CPU cycles are carried out during each update.
+Signals, and the ensuing chains of procedural execution they give rise to, are processed pseudo-concurrently by 24 virtual CPU cores.
 Figure \ref{fig:signalgp-dishtinygp}(TODO a) schematically depicts a single SignalGP instance.
 
-Previous work evolving digital organisms to perform grid-based tasks in which a single computational instance designates which direction to act in via an explicit cardinal ``facing'' state or output \cite{goldsby2014evolutionary, goldsby2018serendipitous, grabowski2010early, biswas2014causes, lalejini2018evolving}.
-However, in our work each cell employs four instances of SignalGP: one ``facing'' each cardinal direction.
-These computational instances all execute the same SignalGP program but are otherwise decoupled and may follow independent chains of execution.
-These instances execute single round robin in an order that is randomly drawn at the outset of each update.
+In this work, we introduce a regulatory extension to the SignalGP system.
+During runtime, instructions may increase or decrease each tagged function's intrinsic tendency to match with --- and activate in response to --- tagged queries.
+Intrinsic tag-to-tag match distances $m$ are modulated by a regulator value $r$ (baseline, 1.0) as follows,
+
+\begin{align*}
+r + r \times m.
+\end{align*}
+
+This scheme allows a function to be upregulated such that every query activates that function (e.g., $r = 0$) or no query activates that function (e.g., $r = \texttt{inf}$).
+These regulation settings are heritable during reproduction but automatically decay after a number of updates determined when they are set.
+
+To allow cells to protect themselves form potentially antagonistic interactions with their neighbors, we filter intercellular messages through a tag-matching membrane.
+At runtime, cells can embed tags in this membrane that either admit or repel incoming messages.
+Messages that do not match with a membrane tag are repelled.
+A message, for example, that would activate a SignalGP function containing an apoptosis instruction could be rejected while other messages are accepted.
+Tags embedded in this membrane automatically decay and may also be regulated.
+We also filter messages between hardware instances within the same cell through a tag-matching membrane, but the default behavior for messages with unmatched tags is admission rather than rejection.
+
+Previous work evolving digital organisms in grid-based problem domains has relied on a single computational instance which designates a direction to act in via an explicit cardinal ``facing'' state or output \cite{goldsby2014evolutionary, goldsby2018serendipitous, grabowski2010early, biswas2014causes, lalejini2018evolving}.
+Under this paradigm, a large portion of genotype space encodes behaviors that are intrinsically asymmetrical with respect to absolute or relative (depending on implementation) cardinal direction.
+However, in grid-based tasks, directional phenotypic symmetry is generally advantageous.
+That is --- in the absence of a polarizing external stimulus --- successful agents generally behave uniformly with respect to each cardinal direction of the grid.
+In this work, each cell employs four instances of SignalGP hardware: one ``facing'' each cardinal direction.
+These computational instances all execute the same SignalGP program but are otherwise decoupled and may follow independent chains of execution and develop independent regulatory states.
+These instances execute round robin step-by-step in an order that is randomly drawn at the outset of each update.
+
+Genetic encodings that exploit problem-domain symmetries are known to promote evolvability and --- ultimately --- evolved solution quality \cite{clune2011performance, cheney2014unshackling}.
+We submit that this directional hardware replication protocol likely increases the fraction of genotype space that encodes cardinally-symmetric phenotypes and therefore better facilitates the evolution of high-fitness phenotypes.
+In further work, we look forward to exploring the evolvability and solution quality implications of this new approach.
+
 The single SignalGP program that is mirrored across the cell's computational instances represents the cell's genome.
-Mutation, with standard SignalGP mutation parameters as in \cite{lalejini2018evolving}, is applied to 10\% of daughter cells at birth.
+Mutation, with standard SignalGP mutation parameters as in \cite{lalejini2018evolving}, is applied to 1\% of daughter cells at birth.
+In addition, genomes encode the bitstrings associated with environmental events.
+These bitstrings evolve at a per-bit mutation rate equivalent to the bitstring labels of SignalGP functions.
 
 Instances within a cell may send intracellular messages to one another or intercellular messages to a neighboring cell.
 Intercellular messages are received by the SignalGP instance that faces the sending cell.
 Figure \ref{fig:signalgp-dishtinygp}(TODO b) schematically depicts the configuration of the four SignalGP instances that constitute a single DISHTINY cell as well as the instances of neighboring cells that receive extracellular messages from the focal cell.
 
-Genetic codings that exploit problem-domain symmetries are known to promote evolvability and, ultimately, evolved solution quality \cite{clune2011performance, cheney2014unshackling}.
-In grid-based tasks, cardinal symmetry of program action is generally desirable; agents should generally sense and react uniformly across cardinal directions.
-In traditional encodings, likely only a small fraction of the genotype space encodes cardinally-symmetric phenotypes.
-We suspect that explicitly mirroring computational instances across cardinal directions dramatically increases the fraction of genotype space that encodes cardinally-symmetric phenotypes.
-We look forward to exploring the potential evolvability and solution quality implications of this methodological innovation, as well as its potential as an avenue to instantiate ploidy in digital evolution, in further work.
+We performed our experiments on a traditional 60-by-60 toroidal grid, supporting a population of at most 3600 individual cells.
+As each cell contained four SignalGP instances, our simulations encompassed up to 14,400 virtual CPUs with up to 345,600 virtual cores.
+In order to reduce the computational burden of our experiment, we intermittently advanced the virtual CPUs.
+Every four updates, virtual CPUs were advanced 16 cycles.
+Intracellular messages were delivered immediately after they were generated.
+Intercellular messages, cached in first-in first-out inboxes with maximum capacity 16, were retieved every four updates.
+Event-driven environmental cues and Accrued cell actions were dispatched every eight updates.
 
-A combination of event-driven environmental triggers and procedural instruction-based sensors detailed in the following two subsections.
+Evolving programs employed combinations of the event-driven environmental cues, procedural instruction-based sensors, and procedural instruction-based actuators detailed in the following two subsections.
 
 \subsection{Instruction Library}
 
-In addition to the generic arithmetic, logic, and program flow instructions in the default SignalGP instruction set, which is detailed in \cite{lalejini2018evolving}, we define the following instructions.
-Instructions that involve an extracellular neighbor default to the cell that the executing SignalGP instance is facing, but may be modified by a register-based argument.
-Many instructions in the listing are provided in several variants, which are detailed in the accompanying description.
+In addition to the generic arithmetic, logic, and program flow instructions in the default SignalGP instruction set, which is laid out in \cite{lalejini2018evolving}, we define the following instructions.
+Instructions that involve an extracellular neighbor default to the cell that the executing SignalGP instance is facing.
 
 \begin{itemize}
 \item \textbf{RNG Draw}
-Draw a random value between 0.0 and 1.0 from on board random number generator and store result in register.
+Draw a random value between 0.0 and 1.0 from random number generator and store result in a register.
 \item \textbf{Send/Broadcast Intracellular Message}
 Send a message to a single other SignalGP instance within the cell or to all SignalGP instances (except the executing instance) within the current cell.
 \item \textbf{Set Stockpile Reserve}
@@ -151,7 +202,8 @@ The amount the cell's generation counter is increased by can be adjusted by regi
 The cell is killed at the end of the current update.
 Two variants are defined.
 Under the conplete variant, the cell's channel ID partial and complete
-\item \textbf{Designate/Revoke Heir} apoptosis 80\% of reproduction cost and own stockpile amount
+\item \textbf{Designate/Revoke Heir} On apoptosis, 50\% of the reproduction cost to establish a cell and the dying cell's own stockpile amount split evenly among neighboring cells that are designated at the time of death.
+These instructions mark or un-mark a neighbor as a heir.
 \item \textbf{Query Own Stockpile}
 Sets a designated register to the amount of resource present in the cell's stockpile.
 \item \textbf{Query Own Channel Generation Counter} -Lev
@@ -179,6 +231,9 @@ This instruction sets a designated register to the neighbor's channel ID.
 This instruction sets a designated register to the amount of resource present in the neighbor's stockpile.
 \end{itemize}
 
+To ensure a founding crop of viable individuals, apoptosis and program flow instructions in the initial randomly-generated population were replaced with no-op instructions.
+However, these instructions were allowed to mutate in to genomes freely once evolutionary runs began.
+
 \subsection{Event Library}
 
 The activating affinity of each event is set at the outset of each experiment using a pseudo random number generator.
@@ -200,33 +255,36 @@ This event allows a querying cell to sense whether its neighbor is a member of a
 
 \subsection{Treatments}
 
-In this work, we explore three experimental parameters:
+In this work, we explore three experimental manipulations:
 \begin{enumerate}
-\item dual versus single hierarchical resource wave/channel-signaling levels,
-\item wave-based versus uniform resource distribution, and
-\begin{itemize}
-\item For the uniform resource distribution treatment, irrespective of channel ID each cell receives an identical amount of resource chosen to approximately match the inflow rate of the dual-level wave-based scheme.
-\end{itemize}
-\item enabled versus disabled channel-sensing events/instructions.
-\begin{itemize}
-\item For the disabled channel-sensing treatment, all channel-sensing instructions perform no operation and all channel-sensing events are never triggered.
-\end{itemize}
+\item flat versus nested hierarchical resource wave/channel-signaling levels,
+\item cooperative versus independent resource collection, and
+\item kin-sensing capacity.
 \end{enumerate}
 
-The first experimental parameter explores the implications of resource wave size and hierarchical nesting in the DISHTINY model.
-The second and third parameters aim to untangle the effects of channel ID with respect to the resource collection task and with respect to kin recognition.
+\begin{itemize}
+\item
+\end{itemize}
 
-We mix and match these experimental parameters in six treatments:
+The first experimental manipulation explores the implications of hierarchical nesting of emergent individuality.
+The second and third manipulations aim to untangle the effects functional cooperation and kin recognition on the evolution of emergent individuality in the system.
+
+To enact the first manipulation, we compare the nested hierarchical resource wave/channel-signaling scheme described above with a single-level scheme with waves extending six toroidal tiles.
+We also increase the resource wave reward to $+0.33$ to approximately match the observed resource inflow rate of the nested scheme.
+
+To enact the second manipulation, we remove the resource wave reward and increase the uniform resource inflow rate to approximately match the net inflow rate of the dual-level wave-based scheme.
+For the third manipulation, we convert all channel-sensing, kin-sensing, and inter-cellular messaging instructions to no-ops and never trigger channel-based or kin-based environmental cues.
+
+We mix and match these experimental manipulations in four treatments:
 \begin{enumerate}
-\item two levels, wave-based resource, enabled channel-sensing (``standard''),
-\item two levels, even resource, enabled channel-sensing (``even''),
-\item two levels, wave-based resource, disabled channel-sensing (``blind''),
-\item two levels, even resource, disabled channel-sensing (``even+blind''),
-\item one level with wave radius four, wave-based resource, enabled channel-sensing (``small wave''), and
-\item one level with wave radius twelve, wave-based resource, enabled channel-sensing (``large wave'').
+\item two levels, wave-based resource, enabled kin-sensing (``nested''),
+\item one level with wave radius twelve, wave-based resource, enabled kin-sensing (``flat'').
+\item two levels, even resource, enabled kin-sensing (``even''), and
+\item two levels, even resource, disabled kin-sensing (``blind'').
 \end{enumerate}
 
 \subsection{Implementation}
 
 We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
 The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/g58xk/}.
+Most replicates completed $2^{20} = 1048576$ update long evolutionary runs within a day, but some took up to a week to complete.
