@@ -1,0 +1,33 @@
+\begin{figure*}[!htbp]
+\begin{center}
+
+\begin{filecontents*}{systematics.csv}
+Measure,Nested,Flat,Even,Blind
+Cellular Generations Elapsed,$5084 \pm 3217$,$4187 \pm 2299$,$2354 \pm 1832$,$2849 \pm 1884$
+Level 1 Generations Elapsed,$3141 \pm  3305$,$462 \pm 217$,$1881 \pm 1740$,$1517 \pm 1440$
+Level 2 Generations Elapsed,$594  \pm  397$,N/A,$347 \pm  187$,$441 \pm 631$
+Phylogenetic Depth,$66 \pm 41$,$41 \pm  21$,$31 \pm 19$,$55 \pm  41$
+Percent Coalescent Replicates,92\%,95\%,95\%,22\%
+\end{filecontents*}
+
+\begin{tabular}{l|c|c|c|c}%
+\bfseries Measure
+  & \bfseries Nested
+  & \bfseries Flat
+  & \bfseries Even
+  & \bfseries Blind
+\csvreader[head to column names]{systematics.csv}{}
+{\\\hline\Measure
+  & \Nested
+  & \Flat
+  & \Even
+  & \Blind
+}
+\end{tabular}
+
+\caption{
+Systematics information TODO
+}
+\label{fig:systematics}
+\end{center}
+\end{figure*}
