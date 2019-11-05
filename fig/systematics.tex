@@ -2,26 +2,33 @@
 \begin{center}
 
 \begin{filecontents*}{systematics.csv}
-Measure,Nested,Flat,Even,Blind
-Cellular Generations Elapsed,$5084 \pm 3217$,$4187 \pm 2299$,$2354 \pm 1832$,$2849 \pm 1884$
-Level 1 Generations Elapsed,$3141 \pm  3305$,$462 \pm 217$,$1881 \pm 1740$,$1517 \pm 1440$
-Level 2 Generations Elapsed,$594  \pm  397$,N/A,$347 \pm  187$,$441 \pm 631$
-Phylogenetic Depth,$66 \pm 41$,$41 \pm  21$,$31 \pm 19$,$55 \pm  41$
-Percent Coalescent Replicates,92\%,95\%,95\%,22\%
+Measure,NestedShort,FlatShort,EvenShort,NestedLong,FlatLong,EvenLong
+Replicate count,40,40,40,37,40,39
+Cellular generations elapsed,$953 \pm 563$,$1140 \pm 697$,$935 \pm 636$,$4635 \pm 3077$,$5869 \pm 3246$,$4628 \pm 3274$
+Level 1 generations elapsed,$566 \pm  637$,$127 \pm 68$,$592 \pm 553$,$2637 \pm 2933$,$654 \pm 353$,$2908 \pm 2768$
+Level 2 generations elapsed,$121 \pm  85$,N/A,$117 \pm  99$,$546 \pm 349$,N/A,$526 \pm  352$
+Phylogenetic depth,$14 \pm 6$,$14 \pm  6$,$15 \pm 8$,$54 \pm 31$,$55 \pm 26$,$60 \pm 44$
+Coalescent replicates,58.5\%,77.5\%,62.5\%,94.6\%,97.5\%,92.3\%
 \end{filecontents*}
 
-\begin{tabular}{l|c|c|c|c}%
+\begin{tabular}{l|c|c|c|c|c|c}%
+&\multicolumn{3}{c|}{Update 262144}
+&\multicolumn{3}{c}{Update 1048576}\\
 \bfseries Measure
   & \bfseries Nested
   & \bfseries Flat
   & \bfseries Even
-  & \bfseries Blind
+  & \bfseries Nested
+  & \bfseries Flat
+  & \bfseries Even
 \csvreader[head to column names]{systematics.csv}{}
 {\\\hline\Measure
-  & \Nested
-  & \Flat
-  & \Even
-  & \Blind
+  & \NestedShort
+  & \FlatShort
+  & \EvenShort
+  & \NestedLong
+  & \FlatLong
+  & \EvenLong
 }
 \end{tabular}
 
