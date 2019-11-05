@@ -1,0 +1,28 @@
+\begin{table*}[!htbp]
+\begin{center}
+
+\begin{filecontents*}{productivity.csv}
+Measure,Nested,Flat,Even
+Per-cell-update resource inflow,$0.0178 \pm 0.0010$,$0.0145 \pm 0.0008$,$0.0175 \pm 0$
+Per-cell-update cell reproduction,$0.0117 \pm 0.0023$,$0.0094 \pm 0.0018$,$0.0113 \pm 0.0018$
+\end{filecontents*}
+
+\begin{tabular}{l|c|c|c}%
+\bfseries Measure
+  & \bfseries Nested
+  & \bfseries Flat
+  & \bfseries Even
+\csvreader[head to column names]{productivity.csv}{}
+{\\\hline\Measure
+  & \Nested
+  & \Flat
+  & \Even
+}
+\end{tabular}
+
+\caption{
+Observed productivity
+}
+\label{tab:productivity}
+\end{center}
+\end{table*}
