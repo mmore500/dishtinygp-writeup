@@ -44,7 +44,7 @@ We refer to each independent resource wave/channel-signaling system as a ``level
 In some experimental treatments, we allowed two resource wave/channel-signaling levels, identified here as level one and level two.
 On level one, resource waves extended a radius of two toroidal tiles.
 On level two they extended a radius of six toroidal tiles.
-On both levels, activated cells netted $+0.25$ resource from a resource wave, but did not collect any resource outside the extent of the resource wave.
+On both levels, activated cells netted $+0.2$ resource from a resource wave, but did not collect any resource outside the extent of the resource wave.
 Due to the different radii of resource waves on different levels, level one selects for small same-channel signaling networks and level two selects for large same-channel signaling networks.
 
 Each cell contained a pair of separate channel IDs, the first for level one and the second for level two.
@@ -86,7 +86,7 @@ Additionally, all channel generation counters are incremented every 512 updates 
 When a cell's channel generation counter reaches 1.5 times the wave radius of its level, it can no longer produce somatic daughter cells.
 Then, after two additional counter steps, cells lose their ability to seed resource wave events and collect resource.
 Thus, as channel groups age over time, their constituent cells lose the ability regenerate somatic tissue and then, soon after, to collect resource.
-To prevent complete stagnation in the case where all cells' channel generation counters expire, we provide a uniform inflow of resource sufficient for one reproduction approximately every thousand updates.
+To prevent complete stagnation in the case where all cells' channel generation counters expire we provide a uniform inflow of $+0.0051$, sufficient for one reproduction approximately every thousand updates.
 
 Interaction between nested channel groups produces a notable selective byproduct.
 Because smaller, level-one channel groups tend to have intrinsically shorter lifespans, in order to achieve the full potential productive somatic lifespan of a larger, level-two channel group its constituent small channel groups must be intermittently regenerated.
@@ -116,12 +116,7 @@ Figure \ref{fig:signalgp-dishtinygp}(TODO a) schematically depicts a single Sign
 
 In this work, we introduce a regulatory extension to the SignalGP system.
 During runtime, instructions may increase or decrease each tagged function's intrinsic tendency to match with --- and activate in response to --- tagged queries.
-Intrinsic tag-to-tag match distances $m$ are modulated by a regulator value $r$ (baseline, 1.0) as follows,
-
-\begin{align*}
-r + r \times m.
-\end{align*}
-
+Intrinsic tag-to-tag match distances $m$ are modulated by a regulator value $r$ (baseline, 1.0) to become $r + r \times m$.
 This scheme allows a function to be upregulated such that every query activates that function (e.g., $r = 0$) or no query activates that function (e.g., $r = \texttt{inf}$).
 These regulation settings are heritable during reproduction but automatically decay after a number of updates determined when they are set.
 
@@ -158,7 +153,7 @@ As each cell contained four SignalGP instances, our simulations encompassed up t
 In order to reduce the computational burden of our experiment, we intermittently advanced the virtual CPUs.
 Every four updates, virtual CPUs were advanced 16 cycles.
 Intracellular messages were delivered immediately after they were generated.
-Intercellular messages, cached in first-in first-out inboxes with maximum capacity 16, were retieved every four updates.
+Intercellular messages, cached in first-in first-out inboxes with maximum capacity 16, were retrieved every four updates.
 Event-driven environmental cues and Accrued cell actions were dispatched every eight updates.
 
 Evolving programs employed combinations of the event-driven environmental cues, procedural instruction-based sensors, and procedural instruction-based actuators detailed in the following two subsections.
@@ -259,43 +254,40 @@ This event allows a querying cell to sense whether its neighbor is a member of a
 
 \subsection{Treatments}
 
-In this work, we explore three experimental manipulations:
+In this work, we screened replicates conducted under combinations of two experimental conditions:
 \begin{enumerate}
-\item flat versus nested hierarchical resource wave/channel-signaling levels,
-\item cooperative versus independent resource collection, and
-\item kin-sensing capacity.
+\item flat versus nested hierarchical resource wave/channel-signaling levels and
+\item cooperative versus independent resource collection.
 \end{enumerate}
 
-\begin{itemize}
-\item
-\end{itemize}
+The first experimental manipulation explores the effects of hierarchical nesting of kin-sensing and/or functional cooperation.
+The second manipulation explores the effects of functional cooperation.
 
-The first experimental manipulation explores the implications of hierarchical nesting of emergent individuality.
-The second and third manipulations aim to untangle the effects functional cooperation and kin recognition on the evolution of emergent individuality in the system.
+\input{fig/productivity.tex}
 
-To enact the first manipulation, we compare the nested hierarchical resource wave/channel-signaling scheme described above with a single-level scheme with waves extending six toroidal tiles.
-We also increase the resource wave reward to $+0.33$ to approximately match the observed resource inflow rate of the nested scheme.
+To enact the first manipulation, we compared the nested hierarchical resource wave/channel-signaling scheme described above with a single-level scheme with waves extending six toroidal tiles.
+We also increased the resource wave reward to $+0.6$ to approximately match the observed resource inflow rate of the nested scheme.
+To enact the second manipulation, we removed the resource wave reward and increased the uniform resource inflow rate to $+0.0175$ in order to approximately match the net inflow rate under the dual-level wave-based scheme.
+Table \ref{tab:productivity} reports productivity observed under these different conditions.
 
-To enact the second manipulation, we remove the resource wave reward and increase the uniform resource inflow rate to approximately match the net inflow rate of the dual-level wave-based scheme.
-For the third manipulation, we convert all channel-sensing, kin-sensing, and inter-cellular messaging instructions to no-ops and never trigger channel-based or kin-based environmental cues.
-
-We mix and match these experimental manipulations in four treatments:
+We mix and match these experimental manipulations in three treatments:
 \begin{enumerate}
-\item two levels, wave-based resource, enabled kin-sensing (``nested''),
-\item one level with wave radius twelve, wave-based resource, enabled kin-sensing (``flat'').
-\item two levels, even resource, enabled kin-sensing (``even''), and
-\item two levels, even resource, disabled kin-sensing (``blind'').
+\item two levels with wave-based resource (``nested''),
+\item one level with wave-based resource (``flat''), and
+\item two levels with even resource, kin-sensing (``even'').
 \end{enumerate}
-
-Harvest/reproduction rates, systematics.
 
 \input{fig/systematics.tex}
 
-\input{fig/harvest.tex}
+We ran 40 replicates under each treatment condition.
+All replicates ran to at least 262144 updates, and all comparisons between or within treatments are conducted at this time point.
+However, some replicates were able to run to 1048576 updates during the available compute time.
+Reported case studies of individual replicates are
 
+Table \ref{tab:systematics} reports the systematics outcomes observed under each treatment.
 
 \subsection{Implementation}
 
 We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
 The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/g58xk/}.
-Most replicates completed $2^{20} = 1048576$ update long evolutionary runs within a day, but some took up to a week to complete.
+Most replicates finished within a day, but some took up to a week to complete.
