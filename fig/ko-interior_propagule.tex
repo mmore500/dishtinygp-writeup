@@ -8,7 +8,7 @@
 \begin{subfigure}[b]{\textwidth}
 \adjincludegraphics[width=\textwidth, trim={{.0\width} {.0\width} {.5\width} {.5\width}}, clip]{knockout/interior_propagule/wildtype/seed=1+title=directional_regulator_viz+treat=resource-wave__channelsense-yes__nlev-two+update=8188+_data_hathash_hash=8b493febd79aad1f+_script_fullcat_hash=90718bb0c6ec4dbd+_source_hash=53a2252-clean+ext=}%
 \caption{Wild type}
-\label{fig:TODO}
+\label{fig:interior_propagule-wt}
 \end{subfigure}
 \end{minipage}%
 \hfill
@@ -18,7 +18,7 @@
 \begin{subfigure}[b]{\textwidth}
 \adjincludegraphics[width=\textwidth, trim={{.5\width} {.5\width} {.0\width} {.0\width}}, clip]{knockout/interior_propagule/regulationknockout/seed=1+title=directional_regulator_viz+treat=resource-wave__channelsense-yes__nlev-two+update=8188+_data_hathash_hash=11ab5cdd47ed18c7+_script_fullcat_hash=90718bb0c6ec4dbd+_source_hash=53a2252-clean+ext=}
 \caption{Regulation knockout}
-\label{fig:TODO}
+\label{fig:interior_propagule-ko-regulation}
 \end{subfigure}
 \end{minipage}%
 \hspace*{\fill}
@@ -30,7 +30,7 @@
 \begin{subfigure}[b]{\textwidth}
 \adjincludegraphics[width=\textwidth, trim={{.5\width} {.5\width} {.0\width} {.0\width}}, clip]{knockout/interior_propagule/propaguleknockout/seed=1+title=directional_regulator_viz+treat=resource-wave__channelsense-yes__nlev-two+update=8188+_data_hathash_hash=2b6711db47fb5887+_script_fullcat_hash=90718bb0c6ec4dbd+_source_hash=53a2252-clean+ext=}%
 \caption{Propagule knockout}
-\label{fig:TODO}
+\label{fig:interior_propagule-ko-propagule}
 \end{subfigure}
 \end{minipage}%
 \hspace*{\fill}
@@ -43,15 +43,17 @@
 \begin{subfigure}[b]{\textwidth}
 \includegraphics[width=\textwidth]{knockout/interior_propagule/title=interior_propagules+_data_hathash_hash=bb0fa6254f1b7398+_script_fullcat_hash=f738b363bea8c98a+_source_hash=53a2252-clean+ext=}%
 \caption{Interior propagule rate by genotype}
-\label{fig:TODO}
+\label{fig:interior_propagule_rate}
 \end{subfigure}
 \end{minipage}%
 \hspace*{\fill}
 
 
 \caption{
-TODO
-PCA regulation visualization
+Comparison of a wild type strain exhibiting interior propagule generation with knockouts of gene regulation and explicitly propagule-generating reproduction instructions.
+Subfigures \ref{fig:interior_propagule-wt}, \ref{fig:interior_propagule-ko-regulation}, and \ref{fig:interior_propagule-ko-propagule} depict gene regulation at each of a cell's four directional SignalGP instances using a PCA mapping from regulatory state to three-dimensional RGB coordinates, calculated uniquely for each level-one same-channel signaling group.
+Black borders divide level-one same-channel signaling groups and white borders divide level-zero same-channel signaling groups.
+Figure \ref{fig:interior_propagule_rate} compares the mean number of interior propagules observed per level-one same-channel signaling group.
 }
 \label{fig:ko-interior_propagule}
 \end{center}
