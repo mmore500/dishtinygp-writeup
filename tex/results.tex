@@ -1,7 +1,7 @@
 \section{Results and Discussion}
 
 In order to broadly assess the selective consequences of each treatment with respect to the functional and reproductive cooperation characteristic of evolutionary transitions of individuality, we begin with aggregate analysis of the relationship between same-channel signaling network context and resource-sharing and cell reproduction behavior.
-Then, in section \ref{sec:life-cycles} we will survey observed multicellular life cycles.
+Then, in section \ref{sec:life-histories} we will survey observed multicellular life histories.
 
 Subsequent sections describe the mechanistic underpinnings and fitness effects of notable phenotypic traits that evolved in individual replicates.
 Section \ref{sec:gene-regulation} reports an endogenous propagule-seeding strategy mediated by gene regulation.
@@ -48,7 +48,7 @@ However, in all three treatments mean sharing to non-direct-kin channelmates was
 [TODO just lookin' at non-overlapping 95\% CI's y'all]
 Thus, all three treatments appear to be sufficient to select for functional cooperation among cells.
 
-\subsection{Case Studies: Life Cycles} \label{sec:life-cycles}
+\subsection{Case Studies: Life Histories} \label{sec:life-histories}
 
 Although functional and reproductive cooperation was ubiquitous among same-channel signaling networks, across replicates these outcomes were realized via diverse set of qualitiative life histories.
 \input{fig/lifecycle.tex}
@@ -57,13 +57,28 @@ Figure \ref{fig:lifecycle} compares four life histories evolved under the nested
 In example \ref{fig:lifecycle-coalesce}, propagules repeatedly bud off of parent groups to yield a larger network of persistent parent-child cooperators.
 In example, \ref{fig:lifecycle-sweep}, propagules are generated at the extremities of parent groups and then rapidly replace most or all of the parent group.
 In example, \ref{fig:lifecycle-burst}, propagules are generated at the interior of a parent group and replace it from the inside out.
-Finally, example \ref{fig:lifecycle-naive} profiles a more naive life history in which --- beyond the cellular progenitor of a propagule group --- the parent and propagule groups exhibit no special relationship.
+Finally, example \ref{fig:lifecycle-naive} profiles a more naive life history in which --- beyond the cellular progenitor of a propagule group --- the parent and propagule groups exhibit no special cooperative relationship.
 
 \subsection{Case Study: Gene Regulation} \label{sec:gene-regulation}
 
 \input{fig/ko-interior_propagule.tex}
 
-Figure \ref{fig:ko-interior_propagule}
+What mechanism determines the localization and timing of the propagule placement obseved in life history example \ref{fig:lifecycle-burst}?
+This wild type strain exhibits an irregular, but somewhat concentric, spatial pattern of gene regulation illustrated in Figure \ref{fig:interior_propagule-wt}.
+In time-series animation, provided in supplementary material, gene regulation appears to fluctuate dynamically.
+
+To assess mechanistic and adaptive role of gene regulation in this strain, we prepared two knockout strains.
+In the first, all gene regulation instructions were replaced with \textbf{Nop} instructions (so that gene regulation values would remain default).
+In the second, the reproduction instructions to spawn a propagule were replaced with \textbf{Nop} instructions.
+Figures \ref{fig:interior_propagule-ko-regulation} and \ref{fig:interior_propagule-ko-propagule} depict the gene regulation phenotypes of these strains.
+
+Figure \ref{fig:interior_propagule_rate} compares interior propagule generation between the strains, confirming the direct mechanistic role of gene regulation in promoting interior propagule generation ($p < 0.05$; bootstrap test).
+[TODO just lookin' at non-overlapping 95\% CI's y'all]
+
+In head-to-head match-ups, the wild type strain outcompetes both the regulation-knockout ($20/20$; $p < 0.001$; two-tailed exact test) and the propagule-knockout strains
+($20/20$; $p < 0.001$; two-tailed exact test).
+The deficiency of the propagule-knockout strain confirms the adaptive role of interior propagule generation.
+Likewise, the deficiency of the regulation-knockout strain affirms the adaptive role of gene regulation in the focal wild type strain.
 
 \subsection{Case Study: Gradient-conditioned Behavior} \label{sec:gradient-conditioned-behavior}
 
