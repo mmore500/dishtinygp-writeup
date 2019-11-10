@@ -143,11 +143,13 @@ In both wild type and knockout strains, there was significantly more recent turn
 Although the wild type strain exhibits slightly higher turnover rates on borders plied by only two groups, borders invaded by a third group are significantly more stale than the knockout strain (non-overlapping 95\% CI).
 This observation could be consistent with a general slowing of turnover as a same-channel signaling networks age, asymmetrical antagonism towards same-channel signaling group neighbors (perhaps arising from a primitive tit-for-tat policy), or some combination of these explanations.
 
-So, do turnover rates fluctuate uniformly across a same-channel signaling network's borders or can turnover distributions differ significantly between non-parent-child groups at a single time point?
-To assess this question, we used Kruskal-Wallis tests (with Bonferroni correction) to screen for same-channel signaling network groups with border turnover rate distributions that differed significantly between neighboring non-propagule-parent same-channel signaling network groups.
-Groups with significantly disparate turnover rate distributions occurred in both the wild type and messaging knockout strains.
-However, a significantly higher proportion of groups exhibited asymmetric border turnover with non-parent-child groups (Figure \ref{fig:intermessaging-intergroup_border-borderasymmetry}; $p < 0.05$; $n=20$; bootstrap test).
-In this case, messaging between cells registered to different propagule-parent same-channel signaling network groups seems unlikely to directly underlie this phenomenon because execution of the gene targeted by messages triggers resource-sharing to the sender, which was seldom observed.
+So, does metabolism fluctuate uniformly across a same-channel signaling network's borders or can metabolism differ significantly across a group's non-parent-child neighbor groups at a single time point?
+To assess this question, we used Kruskal-Wallis tests (with Bonferroni correction) to screen for same-channel signaling network groups with border metabolic distributions that differed significantly between neighboring non-propagule-parent same-channel signaling network groups.
+For each same-channel signaling network group, we calculated mean per-border-cell birth rate at the interface of each of its non-propagule-parent neighbor groups.
+We compared sets of observations taken from each neighbor every eighth update over 256 updates.
+Groups with significantly distinguishable border metabolism distributions occurred in both the wild type and messaging knockout strains.
+However, a significantly higher proportion of groups exhibited asymmetric border metabolism with non-parent-child groups (Figure \ref{fig:intermessaging-intergroup_border-metabolism}; $p < 0.001$; $n=20$; bootstrap test).
+In this case, messaging between cells registered to different propagule-parent same-channel signaling network groups seems unlikely to directly underlie this phenomenon because execution of the gene targeted by messages triggers resource-sharing to the sender, which we seldom observed.
 However, cell-cell messaging within a same-channel signaling network does appear to bolster asymmetrical group-group antagonism, perhaps by conducting tit-for-tat behavior or by altering population demography.
 
 \subsection{Case Studies: Apoptosis} \label{sec:apoptosis}
@@ -162,4 +164,4 @@ To test the adaptive role of apoptosis in these strains, we performed competitio
 Figure \ref{fig:ko-apoptosis} compares the same-channel wild type phenotypes of these strains to their corresponding knockouts.
 
 Apoptosis contributed significantly to fitness in both strains (strain A: $18/20$, $p < 0.001$, two-tailed exact test; strain B: $20/20$, $p < 0.001$, two-tailed exact test).
-The success of strategies incorporating cell suicide is characteristic of a transition from cell-level to collective individuality.
+The success of strategies incorporating cell suicide is characteristic of evolutionary conditions favoring altruism, such kin selection or a transition from cell-level to collective individuality.
