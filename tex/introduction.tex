@@ -1,50 +1,45 @@
 \section{Introduction}
 
-In a fraternal evolutionary transition of individuality, a new, more complex replicating entity is derived from the combination of cooperating kin which have entwined their long-term fates \citep{west2015major}.
-Eusocial insect colonies and multicellular organisms exemplify this phenomenon  \citep{smith1997major}.
-In the first case, individual insects (e.g., ants) act in concert towards the subsistence and propagation of the collective (e.g., an ant colony).
-In the second, individual cells are joined together , in which only a fraction participate in the germ line.
+An evolutionary transition of individuality is an event where a single replicating entity breaks apart into independent replicating sub-entities or multiple previously-independent replicating entities consolidate into a unified replicating entity \citep{smith1997major}.
+Multicellular reversions to a unicellular state exemplify breaking-apart transitions \citep{libby2016stabilizing} while Eukaryotes, derived from symbiosis of prokaryotes and bacteria exemplify coming-together transitions.
+Coming-together transitions in particular are understood as essential to natural history's remarkable record of complexification and diversification \citep{smith1997major} and, within the domain of artificial life, the corresponding but apparently yet-to-be realized concept of open-ended evolution \citep{taylor2016open, banzhaf2016defining}.
 
-Fraternal transitions in individuality: a natural example of organisms cooperating to perform tasks and make decisions at the collective level.
-it's basically establishing a distributed system!
-Like distributed systems, fraternal groups contend with interference and malfunctions.
-The groups must be able to continue to function robustly under the death of individual members.
-Not only members dying, but also going actively rogue e.g., cancer.
+Fraternal evolutionary transitions of individuality, our focus here, particularize a coming-together transition in which a new, more complex replicating entity is derived from the combination of cooperating kin which have entwined their long-term fates \citep{west2015major}.
+Eusocial insect colonies, orchestrated by differentiated castes of close kin working in concert to sustain and propagate the collective, exemplify this phenomenon.
+Fraternal transitions represent only a subset of coming-together transitions: egalitarian transitions, events in which non-kin unite, constitute essential episodes in natural history.
 
-Peto's paradox
+Recent work in experimental evolution, mechanistic modeling, and artificial life work fruitfully complements traditional observational approaches the studying fraternal transitions.
+Beyond characterizing the historical record of fraternal transitions, these avenues of inquiry promise to shed special light on the requisites, mechanisms, and consequences of fraternal transitions.
 
-In previous work, we have developed a digital system to study fraternal transitions of individuality
-blabla
-signalgp
-bla bla
-it's a distributed system
+Notable in the domain of experimental evolution, William Ratcliff and collaborators observed Baker's yeast, in response to selection for hydrodynamic settling, evolve a multicellular snowflake morphology in which parent and daughter cells remaining tethered \citep{ratcliff2014experimental}.
+With this system, they showed that multicellular life history can arise from a single mutation and demonstrated that unicellular bottlenecking of lineages implicitly arises as an inherent geometric consequence of the snowflake morphology \citep{ratcliff2015origins}.
+Under extreme settling selection pressure, they observed the emergence, and subsequent collapse, of evolutionarily-unstable altruistic behavior in which formation of is scaffolded by extracellular DNA and proteins released under elevated apoptosis rates \citep{gulli2019evolution}.
+Separately, incomplete cell separation via an equivalent mutational pathway has also been observed to evolve in response to selection for extracellular sucrose digestion at low population densities \citep{koschwanez2013improved}.
 
-questions:
-we are interested in the effects of increasing disruption on major transitions
-* will cooperative strategies be selected against under higher mutation rates?
-* will we be able to observe a higher apoptosis rate?
-* what is the effect of group size
+A wealth of mathematical models spanning a range of reductive and agent-based approaches describe evolution of multicellularity and cellular specialization \cite{hanschen2015evolutionary}.
+Recent work by Staps and collaborators exemplifies the increasing mechanistic nuance of contemporary computational models.
+They present a mechanistic, agent-based system in which cells evolve weights for a Boolean gene regulatory network with two inputs (representing environmental state), two hidden nodes (representing regulatory state), and two outputs (representing gene products) that control reproduction rate and probability of dissociation from or association into a group.
+Evolutionary runs reveal how ecological conditions, such as predation pressure, constraints on diffusion of nutrients/waste, and changing environmental conditions, determine multicellular evolutionary outcomes with respect to group size, group lifespan, group fertility, and cell fate \citep{staps2019emergence}.
+Staps et al. identify fleshing out the mechanistic capabilities of their agents, such capacities to establish explicit spatial spatial structure within groups and to sense local information, as a compelling target for future work.
 
+Heather Goldsby and collaborators' deme-based work is illustrative of the artificial life approach, where focal structures and processes realize conceptual analogy to, but not necessarily directly representation of, biological reality.
+In this string of studies, spatially-segregated pockets of cells (``demes'') compete with for space in a fixed-size population of demes.
+Individual cells are controlled by self-replicating Avida-style computer programs with special instructions that allow them to interact with their environment and with neighboring cells.
+This free-form paradigm of the genetic programming substrate, theoretically capable of performing any computational function, enables the evolution of agents exhibiting the advanced behavioral capacities proposed by Staps et al., albeit in a manner without direct mechanistic analogy to the biological cells.
+Two modes of reproduction are defined: within-deme and deme-founding.
+In the first, a cell copies itself into a neighboring toroidal tile within its deme.
+In the second, a deme slot is cleared in the deme population then seeded with a single cell from the parent deme.
+Cells grow freely within demes, but deme fecundity depends on the collective profile of computational tasks (e.g., logic functions) performed within the deme.
+This setup mirrors the dynamics of biological multicellularity, in which cell proliferation may either grow an existing multicellular body or spawn a new multicellular body.
+Notably, when task-switching costs are applied Goldsby et al. have observed the evolution of division of labor and extensive functional interdependence within demes and when mutagenic side-effects are applied Goldsby et al. have observed the evolution of germ-soma differentiation \citep{goldsby2012task, goldsby2014evolutionary}.
 
-ultimately, evolving multicellular digital organisms with cancer suppression could be interesting from a theoretical or applied perspective --- perhaps ideas could be extracted for distributed systems or cancer treatment.
-Showing that our system selects for this kind of behavior (that mutation is bad for groups and worse for larger groups) would be interesting because under the right conditions --- instruction set design, mutational operators, run length, steppingstone functionality, and other considerations we might be able to evolve this functionality!
+This work follows closely in the intellectual vein of Goldsby's deme-based experiments.
+However, we pursue a unified spatial model in which higher-order individuality emerges implicitly in terms of the actions of individual cells rather than explicitly in terms of an algorithmic distinction between two spatial scales.
+In our view, the merit and significance of such a distinction on purely philosophical grounds is dubious.
+However, more concretely, we hope that a unified spatial approach will enable more nuanced interactions between emergent individuals, which may interface in terms of many immediate cell-cell interfaces instead of a single deme-deme interface.
+We conjecture that cell-cell interfaces between emergent units of individuality may promote the continued evolution of novelty in terms of interactions between competitors, interactions between propagule and parent groups, and, if nested hierarchical individuality were to emerge, fundamentally different building blocks at each level.
 
-It is the aim of Artificial Life research to realize engineered systems that exhibit properties of biological life in order to study them, but also with an eye towards applications such as artificial intelligence \citep{bedau2003artificial}.
-Studies of evolution have been of particular interest to the community, especially in regard to how organisms are produced with increasing sophistication and complexity \citep{goldsby2017increasing}.
-This particular issue is often described as ``open-ended evolution.''
-Although precise definitions and measures of open-ended evolution are still being established, this term is generally understood to refer to evolving systems that exhibit the continued production of novelty \citep{taylor2016open}.
-Evolutionary transitions in individuality, which are key to the complexification and diversification of biological life \citep{smith1997major}, have been highlighted as key research targets with respect to the question of open-ended evolution \citep{ray1996evolving, banzhaf2016defining}.
-
-In order to study evolutionary transitions of individuality, we must devise a system in which we expect such transitions to occur in a detectable manner.
-To this end, we introduce the DISHTINY (DIStributed Hierarchical Transitions of IndividualitY) platform, which seeks to achieve this goal by explicitly registering organisms in cooperating groups that coordinate spatiotemporally to maximize the harvest of a resource.
-Detection of a transition of individuality in DISHTINY is accomplished by identifying resource-sharing and reproductive division of labor among organisms registered to the same cooperating group.
-Our system is designed such that hierarchal transitions across an arbitrary number of levels of individuality can be selected for and detected.
-We have focused this system on a rigid form of major transition using simple organisms, but the underlying principles that we are studying here can be applied to a wide range of artificial life systems.
-Furthermore, DISHTINY is decentralized;
-it is amenable to massive parallelization via distributed computing.
-We believe that such scalability --- with respect to both concept and implementation --- is an essential consideration in the pursuit of artificial systems capable of generating complexity and novelty rivaling that of biological life via open-ended evolution.
-
-%@CAO, I'm cutting these for now to save space.
-%We begin by laying out the design of the DISHTINY platform.
-%Then, we introduce a model organism used to test for selection for high-level individuality in DISHTINY.
-%Finally, we discuss the results of ecological competition and evolutionary experiments, which demonstrate selection for --- and emergence of --- high-level individuality in DISHTINY.
+To realize fraternal transitions of individuality within a unified spatial realm, we reward explicitly-registered hereditary groups for cooperation on a distributed resource collection task.
+Here, we extend previous work exploring the selective implications of this scheme by evolving parameters for manually-designed cell-level strategies \citep{moreno2019toward}.
+This work employs an event-driven genetic programming representation called SignalGP which was designed to facilitate dynamic interactions among agents and between agents and their environment \citep{lalejini2018evolving}.
+We also debut a regulatory extension to the existing SignalGP system and a novel scheme to interface evolving agents with grid-based sensors and actuators that is designed to gird phenotypic cardinal symmetry.
