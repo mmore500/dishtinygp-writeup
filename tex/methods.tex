@@ -280,12 +280,26 @@ We mix and match these experimental manipulations in three treatments:
 
 We ran 40 replicates under each treatment condition.
 Replicates were seeded with randomly generated SignalGP programs.
-To conserve disk space, we divided evolutionary runs into 262144 ($2^{18}$) update epochs and collected data between epochs.
+To conserve disk space, we divided evolutionary runs into 262144 ($2^{18}$) update epochs and collected data in 8096 ($2^{13}$) update snapshots between epochs.
 All replicates ran at least one full epoch, and all comparisons between or within treatments are conducted at this time point.
 However, most replicates (116/120) were able to run to four epochs during available compute time.
 We screened for and conducted case studies at the latest available data for each replicate.
 All reported case studies happen to be drawn from runs that completed 4 epochs of evolution.
 Table \ref{tab:systematics} reports the systematics outcomes observed under each treatment at epoch 1 and at epoch 4.
+
+\subsection{Competition Experiments and Phenotype Assays}
+
+We performed further experiments to develop case studies of evolved strains we manually screened from our evolutionary runs.
+In these experiments, the most-abundant genotype was harvested from the end-state of evolutionary runs as the wild type strain.
+We collected epigenetic state (i.e., regulatory settings) along with genetic state (i.e., SignalGP program and environmental-cue-to-tag mapping).
+All further work with harvested strains was conducted under environmental conditions identical to that of the treatment they evolved in.
+
+To analyze the relative fitness of knockout strains versus wild type, we seeded 20 $60 \times 60$ toroidal grids with ten cells of each strain, including epigenetic regulator state.
+We ran competition experiments for the duration of one snapshot.
+Seeded cells generally proliferated to completely fill the toroidal grid in the first quarter of the snapshot.
+Competition experiment outcomes were determined by strains' relative cell populations within the grid at the end of the snapshot.
+
+To perform phenotypic comparisons between knockout strains and wild type, we seeded ten cells of each strain onto separate $60 \times 60$ toroidal grids and then cultured them for the duration of one snapshot.
 
 \subsection{Implementation}
 
