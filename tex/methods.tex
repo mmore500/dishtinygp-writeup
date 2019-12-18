@@ -162,6 +162,9 @@ Evolving programs employed combinations of the event-driven environmental cues, 
 
 In addition to the generic arithmetic, logic, and program flow instructions in the default SignalGP instruction set, which is laid out in \cite{lalejini2018evolving}, we define the following instructions.
 Instructions that involve an extracellular neighbor default to the cell that the executing SignalGP instance is facing.
+To maximize viability, apoptosis and program flow instructions in randomly-generated seed genomes were replaced with nop instructions.
+However, apoptosis and program flow instructions were allowed to mutate in freely from that point forward.
+In addition, to counteract crowding of the mutational landscape by the volume of custom instructions provided, a second identical copy of each default SignalGP instruction was included in the library.
 
 \begin{itemize}
 \item \textbf{RNG Draw}
@@ -276,11 +279,13 @@ We mix and match these experimental manipulations in three treatments:
 \end{enumerate}
 
 We ran 40 replicates under each treatment condition.
-All replicates ran to at least 262144 updates, and all comparisons between or within treatments are conducted at this time point.
-However, most replicates (116/120) were able to run to 1048576 updates during the available compute time.
-We screened for and conducted case studies at the latest available update for each replicate.
-All reported case studies happen to be drawn from runs that reached 1048576 updates.
-Table \ref{tab:systematics} reports the systematics outcomes observed under each treatment at both time points.
+Replicates were seeded with randomly generated SignalGP programs.
+To conserve disk space, we divided evolutionary runs into 262144 ($2^{18}$) update epochs and collected data between epochs.
+All replicates ran at least one full epoch, and all comparisons between or within treatments are conducted at this time point.
+However, most replicates (116/120) were able to run to four epochs during available compute time.
+We screened for and conducted case studies at the latest available data for each replicate.
+All reported case studies happen to be drawn from runs that completed 4 epochs of evolution.
+Table \ref{tab:systematics} reports the systematics outcomes observed under each treatment at epoch 1 and at epoch 4.
 
 \subsection{Implementation}
 
