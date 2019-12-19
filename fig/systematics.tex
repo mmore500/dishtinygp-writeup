@@ -1,34 +1,38 @@
-\begin{table*}[!htbp]
+\begin{sidewaystable}[!htb]
 \begin{center}
 
 \begin{filecontents*}{systematics.csv}
-Measure,NestedShort,FlatShort,EvenShort,NestedLong,FlatLong,EvenLong
-Replicate count,40/40,40/40,40/40,37/40,40/40,39/40
-Cellular generations elapsed,$953 \pm 563$,$1140 \pm 697$,$935 \pm 636$,$4635 \pm 3077$,$5869 \pm 3246$,$4628 \pm 3274$
-Level 1 generations elapsed,$566 \pm  637$,$127 \pm 68$,$592 \pm 553$,$2637 \pm 2933$,$654 \pm 353$,$2908 \pm 2768$
-Level 2 generations elapsed,$121 \pm  85$,N/A,$117 \pm  99$,$546 \pm 349$,N/A,$526 \pm  352$
-Phylogenetic depth,$14 \pm 6$,$14 \pm  6$,$15 \pm 8$,$54 \pm 31$,$55 \pm 26$,$60 \pm 44$
-Coalescent replicates,58.5\%,77.5\%,62.5\%,94.6\%,97.5\%,92.3\%
+Measure,FlatEvenShort,FlatWaveShort,NestedEvenShort,NestedWaveShort,FlatEvenLong,FlatWaveLong,NestedEvenLong,NestedWaveLong
+Replicate count,TODO,40/40,40/40,40/40,TODO,40/40,39/40,37/40
+Cellular generations elapsed,TODO,$1140 \pm 697$,$935 \pm 636$,$953 \pm 563$,TODO,$5869 \pm 3246$,$4628 \pm 3274$,$4635 \pm 3077$
+Level 1 generations elapsed,TODO,$127 \pm 68$,$592 \pm 553$,$566 \pm  637$,TODO,$654 \pm 353$,$2908 \pm 2768$,$2637 \pm 2933$
+Level 2 generations elapsed,TODO,N/A,$117 \pm  99$,$121 \pm  85$,TODO,N/A,$526 \pm  352$,$546 \pm 349$
+Phylogenetic depth,TODO,$14 \pm  6$,$15 \pm 8$,$14 \pm 6$,TODO,$55 \pm 26$,$60 \pm 44$,$54 \pm 31$
+Coalescent replicates,TODO,77.5\%,62.5\%,58.5\%,TODO,97.5\%,92.3\%,94.6\%
 \end{filecontents*}
 
-\begin{tabular}{l|c|c|c|c|c|c}%
-&\multicolumn{3}{c|}{Epoch 1}
-&\multicolumn{3}{c}{Epoch 4}\\
+\begin{tabular}{l|c|c|c|c|c|c|c|c}%
+&\multicolumn{4}{c|}{Epoch 1}
+&\multicolumn{4}{c}{Epoch 4}\\
 \bfseries Measure
-  & \bfseries Nested
-  & \bfseries Flat
-  & \bfseries Even
-  & \bfseries Nested
-  & \bfseries Flat
-  & \bfseries Even
+  & \bfseries Flat-Even
+  & \bfseries Flat-Wave
+  & \bfseries Nested-Even
+  & \bfseries Nested-Wave
+  & \bfseries Flat-Even
+  & \bfseries Flat-Wave
+  & \bfseries Nested-Even
+  & \bfseries Nested-Wave
 \csvreader[head to column names]{systematics.csv}{}
 {\\\hline\Measure
-  & \EvenShort
-  & \FlatShort
-  & \NestedShort
-  & \EvenLong
-  & \FlatLong
-  & \NestedLong
+  & \FlatEvenShort
+  & \FlatWaveShort
+  & \NestedEvenShort
+  & \NestedWaveShort
+  & \FlatEvenLong
+  & \FlatWaveLong
+  & \NestedEvenLong
+  & \NestedWaveLong
 }
 \end{tabular}
 
@@ -37,4 +41,4 @@ Systematics outcomes (mean $\pm$ S.D.)
 }
 \label{tab:systematics}
 \end{center}
-\end{table*}
+\end{sidewaystable}

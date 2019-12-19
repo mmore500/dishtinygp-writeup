@@ -2,21 +2,23 @@
 \begin{center}
 
 \begin{filecontents*}{productivity.csv}
-Measure,Nested,Flat,Even
-Per-cell-update resource inflow,$0.0178 \pm 0.0010$,$0.0145 \pm 0.0008$,$0.0175 \pm 0$
-Per-cell-update cell reproduction,$0.0117 \pm 0.0023$,$0.0094 \pm 0.0018$,$0.0113 \pm 0.0018$
+Measure,FlatEven,FlatWave,NestedEven,NestedWave
+Per-cell-update resource inflow,TODO,$0.0145 \pm 0.0008$,$0.0175 \pm 0$,$0.0178 \pm 0.0010$
+Per-cell-update cell reproduction,TODO,$0.0094 \pm 0.0018$,$0.0113 \pm 0.0018$,$0.0117 \pm 0.0023$
 \end{filecontents*}
 
-\begin{tabular}{l|c|c|c}%
+\begin{tabular}{l|c|c|c|c}%
 \bfseries Measure
-  & \bfseries Even
-  & \bfseries Flat
-  & \bfseries Nested
+  & \bfseries Flat-Even
+  & \bfseries Flat-Wave
+  & \bfseries Nested-Even
+  & \bfseries Nested-Wave
 \csvreader[head to column names]{productivity.csv}{}
 {\\\hline\Measure
-  & \Nested
-  & \Flat
-  & \Even
+  & \FlatEven
+  & \FlatWave
+  & \NestedEven
+  & \NestedWave
 }
 \end{tabular}
 
