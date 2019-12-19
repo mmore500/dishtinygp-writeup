@@ -5,28 +5,25 @@ We will first cover the design of the DISHTINY platform and then describe the ce
 
 \subsection{Resource Collection}
 
-\input{fig/explanatory.tex}
-
 DISHTINY allows cell-like organisms to replicate across a toroidal grid.
 Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
 Once sufficient resource has been accrued, cells may pay $1.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
 Collected resource decays at a rate of 0.1\% per update, incentivizing its quick use.
 As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or expel offspring to found a new cooperating ``signaling channel'' group.
 
-As shown at the top of Figure \ref{fig:explanatory}, resource appears at a single point then spreads outwards update-by-update in a diamond-shaped wave. The expanding wave halts at a predefined limit.
+Resource appears at a single point then spreads outwards update-by-update in a diamond-shaped wave. The expanding wave halts at a predefined limit.
 Cells must enter an ``activated'' state to harvest resource as it passes overhead.
 The cell at the starting position of a resource wave is automatically activated, and will propagate the activation signal to neighboring cells on the same signaling channel.
 The newly activated cells, in turn, activate their own neighbors registered to the same signaling channel.
 Neighbors registered to other signaling channels do not activate.
 Each cell, after sending the activation signal, enters a temporary quiescent state.
 In this manner, cells sharing a signaling channel track and harvest an expanding resource wave.
-As shown Figure \ref{fig:explanatory}$a,b$, the rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
+The rate of resource collection for a cell is determined by the size and shape of of its same-channel signaling network;
 small or fragmented same-channel signaling networks will frequently miss out on resource as it passes by.
 
 Resource waves have a limited extent.
 Cells that activate outside the extent of a resource wave collect no resource.
 A long quiescent period ensures that erroneously activated cells miss several subsequent opportunities to collect resource and therefore will tend to collect resource at a slower rate.
-This erroneous activation scenario is depicted in Figure \ref{fig:explanatory}$c$.
 In this manner, ``Goldilocks'' --- not to small and not too big --- signaling networks enjoy superior fitness.
 
 Resource wave starting points (seeds) are tiled over the toroidal grid from a randomly chosen starting location such that the extents of the resource waves do not overlap.
