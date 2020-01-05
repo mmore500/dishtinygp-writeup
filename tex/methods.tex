@@ -6,7 +6,7 @@ We will first cover the design of the DISHTINY platform and then describe the ce
 \subsection{Resource Collection}
 
 DISHTINY allows cell-like organisms to replicate across a toroidal grid.
-Over discrete timesteps (``updates''), the cells can collect a continuous-valued resource.
+Over discrete time steps (``updates''), the cells can collect a continuous-valued resource.
 Once sufficient resource has been accrued, cells may pay $1.0$ resource to place a daughter cell on an adjoining tile of the toroidal grid (i.e., reproduce), replacing any existing cell already there.
 Collected resource decays at a rate of 0.1\% per update, incentivizing its quick use.
 As cells reproduce, they can choose to include offspring in the parent's cooperating ``signaling channel'' group or expel offspring to found a new cooperating ``signaling channel'' group.
