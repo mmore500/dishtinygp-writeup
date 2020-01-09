@@ -137,31 +137,69 @@ $p < 0.001$, bootstrap test% 2020/01-06-ll.md
 Figure \ref{fig:intermessaging-intergroup_border-phen} compares the cell-cell messaging, resource sharing, and parent-propagule phenotypes between wild type and cell-cell messaging knockout variants of strain B.
 Cell-cell messaging volume appears generally uniform in the interiors of same-channel signaling groups, but some group-group borders --- largely, but not entirely parent-propagule interfaces --- manifest somewhat depressed cell-cell messaging overlaid with an alternating motif of elevated cell-cell messaging.
 We affirmed the adaptiveness of cell-cell messaging in this strain through competition experiments between wild type and knockout variants ($19/20$; $p < 0.001$; two-tailed exact test).
-The gene activated by cell-cell messaging in this strain contains a share resource instruction and, indeed, we observed significantly greater net resource sharing in the wild type strain (Figure \ref{fig:intermessaging-intergroup_border-sharing}; non-overlapping 95\% CI).
+The gene activated by cell-cell messaging in this strain contains a share resource instruction and, indeed, we observed significantly greater net resource sharing in the wild type strain
+(%
+WT: mean 0.27, S.D. 0.03, $n=20$;
+KO: mean 0.23, S.D. 0.02, $n=20$;
+$p < 0.001$, bootstrap test
+%Figure \ref{fig:intermessaging-intergroup_border-sharing};
+non-overlapping 95\% CI%
+). %2020-01-06-ll.md
 However, that same gene also contains a reproduction-inhibiting instruction, leading us to investigate whether cell-cell messaging could influence a broader set of phenotypic traits.
 
-Cell-cell messaging in the wild type strain appears to be associated with a somewhat drawn out collective life history.
-The wild-type strain exhibits significantly greater mean cell age (Figure \ref{fig:intermessaging-intergroup_border-sharing}; non-overlapping 95\% CI; $n=20$) and mean propagule parent group age (Figure \ref{fig:intermessaging-intergroup_border-pparentage}; non-overlapping 95\% CI; $n=20$).
-This strain exhibits the ``sweep'' life history described in Figure \ref{fig:lifecycle-sweep}, so propagule generation can be largely or entirely destructive to the parent group.
+Cell-cell messaging in the wild type strain appears to be associated with a drawn out same-channel signaling network life history.
+The wild-type strain exhibits significantly greater mean cell age
+(%
+WT: mean 59, S.D. 7, $n=20$;
+KO: mean 49, S.D. 4, $n=20$;
+$p < 0.001$, bootstrap test%
+%Figure \ref{fig:intermessaging-intergroup_border-sharing};
+) %2020-01-06-ll.md
+and, across propagule-generation events, significantly greater mean parent group age
+(%
+WT: mean 1055, S.D. 82, $n=20$;
+KO: mean 924, S.D. 62, $n=20$;
+$p < 0.001$, bootstrap test%
+%Figure \ref{fig:intermessaging-intergroup_border-pparentage};
+). %2020-01-06-ll.md
+This strain exhibits the ``sweep'' life history depicted in Figure \ref{fig:lifecycle-sweep}, so propagule generation can be largely or entirely destructive to the parent group.
 So, the increase in mean cell age could plausibly be attributable to delayed propagule genesis or, alternatively, delayed propagule genesis could arise from other factors retarding life history.
 
-Cell-cell messaging not only enables functional coordination within cellular collectives but could might reify adaptive communication among cellular collectives.
-This possibility motivated us to take a closer look at interactions between same-channel signaling network groups.
-We anecdotally observed that contiguous bands of low cell turnover frequently arose along parent-propagule borders, but also occasionally between other same-channel signaling network groups.
-We measured the mean age of perturbed borders (e.g., updates elapsed between perturbations) along non-parent-child borders.
-Figure \ref{fig:intermessaging-intergroup_border-borderage} splits this statistic out between borders that were disrupted by members of the same-channel signaling network flanking the border (``affiliate'') or by a member of a third same-channel signaling network (``neighbor'').
-In both wild type and knockout strains, there was significantly more recent turnover in the absence of intrusion by a third same-channel signaling network (non-overlapping 95\% CI).
-Although the wild type strain exhibits slightly higher turnover rates on borders plied by only two groups, borders invaded by a third group are significantly more stale than the knockout strain (non-overlapping 95\% CI).
-This observation could be consistent with a general slowing of turnover as a same-channel signaling networks age, asymmetrical antagonism towards same-channel signaling group neighbors (perhaps arising from a primitive tit-for-tat policy), or some combination of these explanations.
+In this strain, we anecdotally observed that contiguous bands of low cell turnover and anomalous cell-cell messaging volumes frequently arose along parent-propagule borders, but also occasionally between other same-channel signaling network groups.
+Cell-cell messaging not only enables functional coordination within cellular collectives but could also enable adaptive communication among cellular collectives.
+This possibility motivated us to test for non-uniform interactions between non-parent-propagule same-channel signaling network groups.
 
-So, does metabolism fluctuate uniformly across a same-channel signaling network's borders or can metabolism differ significantly across a group's non-parent-child neighbor groups at a single time point?
-To assess this question, we used Kruskal-Wallis tests (with Bonferroni correction) to screen for same-channel signaling network groups with border metabolic distributions that differed significantly between neighboring non-propagule-parent same-channel signaling network groups.
+We measured mean border age (equivalent to the youngest age of either flanking cell) along the borders of non-parent-propagule same-channel signaling network groups.
+Figure \ref{fig:intermessaging-intergroup_border-borderage} splits this statistic out between borders that were disrupted either by cells birthed from members of the same-channel signaling networks flanking the border (``affiliate'') or from a member of a third same-channel signaling network (``neighbor'').
+In both wild type and knockout strains, there was significantly more recent turnover in the absence of intrusion by a third same-channel signaling network (non-overlapping 95\% CI, bootstrap test).
+Restated, borders invaded by a third party were more on average more stable than those perturbed by either of the flanking same-channel signaling networks.
+
+This phenomenon was accentuated in the wild type strain.
+Although the wild type strain exhibits slightly higher turnover rates on borders plied by only two groups, borders invaded by a third group are significantly more stale than the knockout strain (non-overlapping 95\% CI, bootstrap test).
+
+Greater age of borders disrupted by a third party would be consistent with a general slowing of turnover as same-channel signaling networks age or overall reduced resource availability due to the presence of a third party.
+However, a primitive tit-for-tat policy where a subset of non-parent-propagule same-channel signaling network borders stabilize (until invaded by a third party) could also contribute to such an observation.
+
+So, does the cell reproduction rate fluctuate uniformly across a same-channel signaling network's borders or can reproduction rate differ significantly between a group's non-parent-propagule neighbor groups at a single time point?
+To assess this question, we used Kruskal-Wallis tests (with Bonferroni correction) to screen for same-channel signaling network groups with border reproduction rate distributions that differed significantly between neighboring non-propagule-parent same-channel signaling network groups.
 For each same-channel signaling network group, we calculated mean per-border-cell birth rate at the interface of each of its non-propagule-parent neighbor groups.
-We compared sets of observations taken from each neighbor every eighth update over 256 updates.
-Groups with significantly distinguishable border metabolism distributions occurred in both the wild type and messaging knockout strains.
-However, a significantly higher proportion of groups exhibited asymmetric border metabolism with non-parent-child groups (Figure \ref{fig:intermessaging-intergroup_border-metabolism}; $p < 0.001$; $n=20$; bootstrap test).
-In this case, messaging between cells registered to different propagule-parent same-channel signaling network groups seems unlikely to directly underlie this phenomenon because execution of the gene targeted by messages triggers resource-sharing to the sender, which we seldom observed.
-However, cell-cell messaging within a same-channel signaling network does appear to bolster asymmetrical group-group antagonism, perhaps by conducting tit-for-tat behavior or by altering population demography.
+We collected observations with respect to each neighbor group every eighth update over 256 updates.
+Groups with significantly differentiated border reproduction rate distributions occurred in both the wild type and messaging knockout strains.
+That is, in both strains, we observed some groups that preferentially expended resource to reproduce at their interfaces with a subset of non-parent-propagule same-channel signaling network group neighbors.
+
+Again, this phenomenon was accentuated in the wild type strain.
+A significantly higher proportion of groups exhibited asymmetric border reproduction rates with non-parent-child groups
+(%
+WT: mean 0.36, S.D. 0.06, $n=20$;
+KO: mean 0.28, S.D. 0.04, $n=20$;
+$p < 0.001$, bootstrap test%
+). %2020-01-06-ll.md
+
+Messaging between cells registered to different parent-propagule same-channel signaling network groups seems unlikely to directly underlie asymmetric border reproduction rates because execution of the gene targeted by messages triggers resource-sharing to the sender, which we seldom observed between non-parent-propagule groups.
+So, intercell messaging within same-channel signaling network groups is most likely responsible.
+It seems most plausible that increased incidence of asymmetric border reproduction rates arises as a knock-on effect of the life history retarding demographic effects of cell-cell messaging originally discussed.
+Perhaps older, ``full-grown'' same-channel groups arrive at a low-reproduction detente at interfaces with other older, ``full-grown'' same-channel groups while resisting incursion at interfaces with younger, growing same-channel groups.
+This would constitute a contextually-expressed tit-for-tat policy, perhaps mediated by cell age or cell generations elapsed from the group's founding propagule cell.
 
 \subsection{Case Studies: Apoptosis} \label{sec:apoptosis}
 
