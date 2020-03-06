@@ -38,29 +38,9 @@ These computational instances all execute the same SignalGP program but are othe
 Instances within a cell may coordinate via so-called intracellular messaging.
 Figure \ref{fig:dishtinygp-cartoon} schematically depicts the configuration of the four SignalGP instances that constitute a single DISHTINY cell as well as the instances of neighboring cells that receive extracellular messages from the focal cell.
 
-\subsection{Instruction Library}
-
-In addition to the generic arithmetic, logic, utility, and program flow instructions in the default SignalGP instruction set, which is laid out in \cite{lalejini2018evolving}, we define a number of custom instructions to allow evolving programs to sense and interact with their environments, including
-\begin{itemize}
-\item reproduction,
-\item resource sharing,
-\item channel ID sensing,
-\item apoptosis,
-\item intracellular messaging, and
-\item intercellular messaging.
-\end{itemize}
-We provide an listing of our experiment's instruction library in supplementary material \ref{sup:standard_instruction_library} \ref{sup:custominstruction_library}.
-
-\subsection{Event Library}
-
-Event-driven sensing has been shown to enable evolution of SignalGP programs that more successfully react to  environmental state \cite{lalejini2018evolving}, so we supplement our instruction-based sensors with event-based input.
-On a regular basis, a subset of environmental events are triggered on each SignalGP hardware based on current local environmental conditions.
-The activating affinity of each event is genetically-encoded as part of the program currently executing on the hardware.
-We provide a listing of our experiment's event library in supplementary material \ref{sup:environmental_cue_library}.
-
 \subsection{Treatments}
 
-In this work, we screened replicates conducted under combinations of two experimental conditions:
+We screened evolutionary replicates conducted under combinations of two experimental conditions:
 \begin{enumerate}
 \item flat versus nested hierarchical resource wave/channel-signaling levels and
 \item cooperative versus independent resource collection.

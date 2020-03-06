@@ -138,6 +138,9 @@ Figure \ref{fig:dishtinygp-cartoon} schematically depicts the configuration of t
 
 \subsection{Standard SignalGP Instruction Library} \label{sup:standard_instruction_library}
 
+The default SignalGP instruction set defines a number of generic arithmetic, logic, utility, and program flow instructions \cite{lalejini2018evolving}.
+We include these instructions in our experiment's instruction library.
+
 To counteract crowding of the mutational landscape by the volume of custom instructions provided, a second identical copy of each standard SignalGP instruction was included in the library.
 
 \begin{itemize}
@@ -224,6 +227,18 @@ Copy the program module regulator value of currently-executing program module in
 \end{itemize}
 
 \subsection{Custom Instruction Library} \label{sup:custom_instruction_library}
+
+We define a number of custom instructions to allow evolving programs to sense and interact with their environments, including
+\begin{itemize}
+\item reproduction,
+\item resource sharing,
+\item channel ID sensing,
+\item apoptosis,
+\item intracellular messaging, and
+\item intercellular messaging.
+\end{itemize}
+
+We provide an listing of our experiment's instruction library below.
 
 Instructions that involve an extracellular neighbor default to the cell that the executing SignalGP instance is facing.
 To ensure a founding crop of viable individuals, apoptosis and program flow instructions in the initial randomly-generated population were replaced with no-op instructions.
@@ -329,7 +344,10 @@ This instruction sets a designated register to the amount of resource present in
 
 \subsection{Environmental Cue Library} \label{sup:environmental_cue_library}
 
-Environmental cues were triggered every eight updates.
+Event-driven sensing has been shown to enable evolution of SignalGP programs that more successfully react to  environmental state \cite{lalejini2018evolving}, so we supplement our instruction-based sensors with event-based input.
+Every eight updates, a subset of environmental events are triggered on each SignalGP hardware based on current local environmental conditions.
+The activating affinity of each event is genetically-encoded as part of the program currently executing on the hardware.
+We provide a listing of our experiment's event library in supplementary material \ref{sup:environmental_cue_library}.
 
 \begin{itemize}
 \item \textbf{On Update}
