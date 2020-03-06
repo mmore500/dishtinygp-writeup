@@ -446,3 +446,190 @@ To perform phenotypic comparisons between knockout strains and wild type, we see
 We implemented our experimental system using the Empirical library for scientific software development in C++, available at \url{https://github.com/devosoft/Empirical}.
 The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/g58xk/}.
 Most replicates finished within a day, but some took up to a week to complete.
+
+\subsection{Reproductive Cooperation} \label{sec:reproductive-cooperation}
+
+\input{fig/reproduction_surrounded.tex}
+
+In the case of an evolutionary transition of individuality, we would expect cells to modulate their own reproductive behavior to align with group interests.
+In this environment, cell reproduction inherently antagonizes immediate neighbors so in the case of a transition we would expect somatic growth to occur primarily at group peripheries.
+Figure \ref{fig:reproduction_surrounded} compares cellular reproduction rates between the interior and exterior of highest-level same-channel signaling networks.
+In the nested treatments, this corresponded to the level-one channel and, in the flat treatments where no level-one channel was defined, this corresponded to the level-zero channel.
+For all treatments, phenotypes with depressed interior cellular reproduction rates dominated across replicates (non-overlapping 95\% CI).
+All four treatments appear to be sufficient to select for reproductive cooperation among cells.
+
+\subsection{Resource Sharing} \label{sec:resource-sharing}
+
+\input{fig/sharing.tex}
+\input{fig/sharing_channelmate.tex}
+
+Figure \ref{fig:sharing} overviews evolved resource sharing behavior across cellular contexts.
+
+Replicates in the flat-wave treatment exhibit an especially elevated rate of resource sharing to cell children.
+This could perhaps be due to an especial selective pressure to convey resource towards the group periphery.
+
+Surprisingly, in the Nested-Wave treatment resource was shared at a higher mean rate among high-level same-channel signaling groups than low-level groups.
+This observation is likely due to replicates where level-one same-channel signaling groups were composed of single-cell level-zero same-channel signaling groups (where no or very few opportunities for level-zero resource sharing occurred).
+
+Finally, under all treatments resource was transferred to highest-level channelmates at a significantly higher mean rate than to unrelated neighbors (non-overlapping 95\% CI).
+This observation suggests that functional cooperation within same-channel groups might have been a common evolutionary outcome under all four treatments.
+However, it could potentially be driven exclusively by resource-sharing between direct cellular kin.
+
+Figure \ref{fig:sharing_channelmate} breaks same-channel resource-sharing apart by cellular kin relation.
+In all four treatments, mean sharing to direct-kin highest-level channelmates was indeed greater than to other channelmates.
+This could be due to an evolutionary incentive to favor direct cell kin over other channelmates, group-level selection for asymmetric resource flow achieved by preferential sharing, or some combination of the two.
+However, in all four treatments mean sharing to non-direct-kin highest-level channelmates was also significantly greater than resource sharing to unrelated neighbors (non-overlapping 95\% CI).
+Thus, all four treatments appear to be sufficient to select for functional cooperation among cells.
+
+\subsection{Case Study: Gradient-conditioned Cell Behavior} \label{sec:gradient-conditioned-behavior}
+
+\input{fig/ko-stockpiletrigger-sharing.tex}
+
+We discovered a strain using resource concentration to regulate directionality of resource sharing in a manner somewhat akin to morphogenic patterning.
+This strain's wild type outcompeted a variant with knock out of capacity to asses relative richness of neighboring resource stockpiles ($20/20$; $p < 0.001$; two-tailed exact test).
+Figure \ref{fig:ko-stockpiletrigger-sharing} contrasts the wild type resource-sharing phenotype  with the more sparse knockout resource-sharing phenotype.
+
+\subsection{Case Study: Morphology} \label{sec:morphology}
+
+\input{fig/ko-morphology.tex}
+
+One of the more striking examples of genetically-encoded same-channel signaling network patterning, in which level-zero same-channel signaling groups arranged as elongated single-file strings, arose in a Nested-Even treatment replicate.
+Figure \ref{fig:morphology-wt} provides a snapshot of this strain's same-channel signaling morphology.
+Knocking out intracell messaging disrupts the stringy arrangement of same-channel signaling groups, shown in Figure \ref{fig:morphology-ko}.
+Figure \ref{fig:morphology-shape} compares the distribution of cells' level-zero same-channel neighbor counts for level-one groups of size nine or greater.
+Wild type cells are significantly less likely to have three or four level-zero same-channel neighbors, as we would expect of single-file strings (non-overlapping 95\% CI).
+However, we also observed that wild-type level-zero groups had significantly fewer cells
+(WT: mean $2.1$, S.D. $1.5$; messaging knockout: mean $4.3$, S.D. 5.1; $p < 0.001$; bootstrap test).
+To determine whether morphological patterning besides smaller group size contributed to observed differences in neighbor count, we compared a dimensionless shape factor describing group stringiness (perimeter divided by the square root of area) between the wild type and messaging knockout strains.
+Between level-zero group size four (the smallest size stringiness can emerge at on a grid) and level-zero group size nine (the largest size we had replicate wild type observations for), wild type exhibited significantly greater stringiness
+(4: $p < 0.01$, bootstrap test; 5: $p < 0.01$, bootstrap test; 6, 7, 8: non-overlapping 95\% CI; 9 $p < 0.01$, bootstrap test).
+
+However, competition experiments between the wild type and knockout strain failed to establish a fitness differential ($6/20$).
+Thus, it seems this trait emerged either by drift, as the genetic background of a selective sweep, or --- perhaps less likely --- was advantageous against a divergent competitor earlier in evolutionary history.
+
+\subsection{Case Studies: Cell-cell Messaging} \label{sec:cell-cell-messaging}
+
+\input{fig/ko-intermessaging-sharing.tex}
+
+We analyzed the phenotypic and fitness implications of cell-cell messaging in two strains: strain A, evolved under the Flat-Wave treatment, and strain B, evolved under the Nested-Wave treatment.
+
+Figure \ref{fig:ko-intermessaging-sharing} depicts the cell-cell messaging, resource sharing, and resource stockpile phenotypes of wild type strain A side-by-side with corresponding phenotypes of a cell-cell messaging knockout strain.
+In the wild type strain, cell-cell messaging emanates from irregular collection of cells --- in some regions, grid-like and in others more sparse --- broadcasting to all neighboring cells.
+Resource sharing appears more widespread in the knockout strain than in the wild type.
+However, messaging's effects suppressing resource sharing is neither spatially nor directionally homogeneous.
+Relative to the knockout strain, cell-cell messaging increases variance in cardinal directionality of net resource sharing
+(%
+WT: mean 0.28, S.D. 0.07, $n=54$; % 2020/01-06-ll.md
+KO: mean 0.17, S.D. 0.07, $n=69$; % 2020/01-06-ll.md
+%Figure \ref{fig:intermessaging-sharing-direction};
+$p < 0.001$, bootstrap test%
+).
+Cell-cell messaging also increases variance of resource sharing density with respect to spatial quadrants demarcated by same-channel signaling group's spatial centroid
+(%
+WT: mean 0.23, S.D. 0.07, $n=52$; % 2020/01-06-ll.md
+KO: mean 0.16, S.D. 0.08, $n=68$; % 2020/01-06-ll.md
+%Figure \ref{fig:intermessaging-sharing-quadrant};
+$p < 0.001$, bootstrap test% 2020/01-06-ll.md
+).
+We used competition experiments to confirm the fitness advantage both of cell-cell messaging ($20/20$; $p < 0.001$; two-tailed exact test) and (using a separate knockout strain) resource sharing ($20/20$; $p < 0.001$; two-tailed exact test).
+The fitness advantage of irregularized sharing might stem from a corresponding increase in the fraction of cells with enough resource to reproduce stockpiled
+(%
+WT: mean 0.18, S.D. 0.11, $n=54$; % 2020/01-06-ll.md
+KO: mean 0.06, S.D. 0.08, $n=69$; % 2020/01-06-ll.md
+$p < 0.001$, bootstrap test% 2020/01-06-ll.md
+).
+
+
+\input{fig/ko-intermessaging-intergroup_border.tex}
+
+Figure \ref{fig:intermessaging-intergroup_border-phen} compares the cell-cell messaging, resource sharing, and parent-propagule phenotypes between wild type and cell-cell messaging knockout variants of strain B.
+Cell-cell messaging volume appears generally uniform in the interiors of same-channel signaling groups, but some group-group borders --- largely, but not entirely parent-propagule interfaces --- manifest somewhat depressed cell-cell messaging overlaid with an alternating motif of elevated cell-cell messaging.
+We affirmed the adaptiveness of cell-cell messaging in this strain through competition experiments between wild type and knockout variants ($19/20$; $p < 0.001$; two-tailed exact test).
+The gene activated by cell-cell messaging in this strain contains a share resource instruction and, indeed, we observed significantly greater net resource sharing in the wild type strain
+(%
+WT: mean 0.27, S.D. 0.03, $n=20$;
+KO: mean 0.23, S.D. 0.02, $n=20$;
+$p < 0.001$, bootstrap test
+%Figure \ref{fig:intermessaging-intergroup_border-sharing};
+non-overlapping 95\% CI%
+). %2020-01-06-ll.md
+However, that same gene also contains a reproduction-inhibiting instruction, leading us to investigate whether cell-cell messaging could influence a broader set of phenotypic traits.
+
+Cell-cell messaging in the wild type strain appears to be associated with a drawn out same-channel signaling network life history.
+The wild-type strain exhibits significantly greater mean cell age
+(%
+WT: mean 59, S.D. 7, $n=20$;
+KO: mean 49, S.D. 4, $n=20$;
+$p < 0.001$, bootstrap test%
+%Figure \ref{fig:intermessaging-intergroup_border-sharing};
+) %2020-01-06-ll.md
+and, across propagule-generation events, significantly greater mean parent group age
+(%
+WT: mean 1055, S.D. 82, $n=20$;
+KO: mean 924, S.D. 62, $n=20$;
+$p < 0.001$, bootstrap test%
+%Figure \ref{fig:intermessaging-intergroup_border-pparentage};
+). %2020-01-06-ll.md
+This strain exhibits the ``sweep'' life history depicted in Figure \ref{fig:lifecycle-sweep}, so propagule generation can be largely or entirely destructive to the parent group.
+So, the increase in mean cell age could plausibly be attributable to delayed propagule genesis or, alternatively, delayed propagule genesis could arise from other factors retarding life history.
+
+In this strain, we anecdotally observed that contiguous bands of low cell turnover and anomalous cell-cell messaging volumes frequently arose along parent-propagule borders, but also occasionally between other same-channel signaling network groups.
+Cell-cell messaging not only enables functional coordination within cellular collectives but could also enable adaptive communication among cellular collectives.
+This possibility motivated us to test for non-uniform interactions between non-parent-propagule same-channel signaling network groups.
+
+We measured mean border age (equivalent to the youngest age of either flanking cell) along the borders of non-parent-propagule same-channel signaling network groups.
+Figure \ref{fig:intermessaging-intergroup_border-borderage} splits this statistic out between borders that were disrupted either by cells birthed from members of the same-channel signaling networks flanking the border (``affiliate'') or from a member of a third same-channel signaling network (``neighbor'').
+In both wild type and knockout strains, there was significantly more recent turnover in the absence of intrusion by a third same-channel signaling network (non-overlapping 95\% CI, bootstrap test).
+Restated, borders invaded by a third party were more on average more stable than those perturbed by either of the flanking same-channel signaling networks.
+
+This phenomenon was accentuated in the wild type strain.
+Although the wild type strain exhibits slightly higher turnover rates on borders plied by only two groups, borders invaded by a third group are significantly more stale than the knockout strain (non-overlapping 95\% CI, bootstrap test).
+
+Greater age of borders disrupted by a third party would be consistent with a general slowing of turnover as same-channel signaling networks age or overall reduced resource availability due to the presence of a third party.
+However, a primitive tit-for-tat policy where a subset of non-parent-propagule same-channel signaling network borders stabilize (until invaded by a third party) could also contribute to such an observation.
+
+So, does the cell reproduction rate fluctuate uniformly across a same-channel signaling network's borders or can reproduction rate differ significantly between a group's non-parent-propagule neighbor groups at a single time point?
+To assess this question, we used Kruskal-Wallis tests (with Bonferroni correction) to screen for same-channel signaling network groups with border reproduction rate distributions that differed significantly between neighboring non-propagule-parent same-channel signaling network groups.
+For each same-channel signaling network group, we calculated mean per-border-cell birth rate at the interface of each of its non-propagule-parent neighbor groups.
+We collected observations with respect to each neighbor group every eighth update over 256 updates.
+Groups with significantly differentiated border reproduction rate distributions occurred in both the wild type and messaging knockout strains.
+That is, in both strains, we observed some groups that preferentially expended resource to reproduce at their interfaces with a subset of non-parent-propagule same-channel signaling network group neighbors.
+
+Again, this phenomenon was accentuated in the wild type strain.
+A significantly higher proportion of groups exhibited asymmetric border reproduction rates with non-parent-child groups
+(%
+WT: mean 0.36, S.D. 0.06, $n=20$;
+KO: mean 0.28, S.D. 0.04, $n=20$;
+$p < 0.001$, bootstrap test%
+). %2020-01-06-ll.md
+
+Messaging between cells registered to different parent-propagule same-channel signaling network groups seems unlikely to directly underlie asymmetric border reproduction rates because execution of the gene targeted by messages triggers resource-sharing to the sender, which we seldom observed between non-parent-propagule groups.
+So, intercell messaging within same-channel signaling network groups is most likely responsible.
+It seems most plausible that increased incidence of asymmetric border reproduction rates arises as a knock-on effect of the life history retarding demographic effects of cell-cell messaging originally discussed.
+Perhaps older, ``full-grown'' same-channel groups arrive at a low-reproduction detente at interfaces with other older, ``full-grown'' same-channel groups while resisting incursion at interfaces with younger, growing same-channel groups.
+This would constitute a contextually-expressed tit-for-tat policy, perhaps mediated by cell age or cell generations elapsed from the group's founding propagule cell.
+
+\subsection{Case Studies: Apoptosis} \label{sec:apoptosis}
+
+\input{fig/ko-apoptosis.tex}
+
+Screening replicate evolutionary runs by apoptosis rate flagged two strains with several orders of magnitude greater activity.
+In strain A, evolved under the Nested-Even treatment, apoptosis accounts for 2\% of cell mortality.
+In strain B, evolved under the Nested-Flat treatment, 15\% of mortality is due to apoptosis.
+
+To test the adaptive role of apoptosis in these strains, we performed competition experiments against apoptosis knockout strains, in which all apoptosis instructions were substituted for Nop instructions.
+Figure \ref{fig:ko-apoptosis} compares the same-channel wild type phenotypes of these strains to their corresponding knockouts.
+
+Apoptosis contributed significantly to fitness in both strains (strain A: $18/20$, $p < 0.001$, two-tailed exact test; strain B: $20/20$, $p < 0.001$, two-tailed exact test).
+The success of strategies incorporating cell suicide is characteristic of evolutionary conditions favoring altruism, such kin selection or a transition from cell-level to collective individuality.
+
+To discern whether spatial or temporal targeting of apoptosis contributed to fitness, we competed wild type strains with apoptosis-knockout strains on which we externally triggered cell apoptosis with spatially and temporally uniform probability.
+In one set of competition experiments, the knockout strain's apoptosis probability was based on the observed apoptosis rate of the wild type strain's monoculture.
+In a second set of competition experiments, the knockout strain's apoptosis probability was based on the observed apoptosis rate of the population in the evolutionary run the wild type strain was harvested from.
+In both sets of experiments on both strains, wild type strains outcompeted knockout strains with uniform apoptosis probabilities
+(%
+strain A \@ monoculture rate: $18/20$, $p < 0.001$, two-tailed exact test;
+strain A \@ population rate: $19/20$, $p < 0.001$, two-tailed exact test;
+strain B \@ monoculture rate: $20/20$, $p < 0.001$, two-tailed exact test;
+strain B \@ population rate: $20/20$, $p < 0.001$, two-tailed exact test%
+). %2020-01-06-ll.md
