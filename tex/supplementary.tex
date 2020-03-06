@@ -1,5 +1,30 @@
 \section{Supplementary Material}
 
+\subsection{Background} \label{sup:background}
+
+In the domain of experimental evolution, William Ratcliff and collaborators imposed a selective pressure for hydrodynamic settling on Baker's yeast and observed, in response, the emergence of a multicellular snowflake morphology in which parent and daughter cells remained tethered \citep{ratcliff2014experimental}.
+With this system, they showed that multicellular life history can arise from a single mutation and demonstrated that unicellular bottlenecking of lineages implicitly arises as an inherent geometric consequence of the snowflake morphology \citep{ratcliff2015origins}.
+Under extreme settling selection pressure, they observed the emergence (and, encumbered by free riders, subsequent collapse) of altruistic behavior in which extracellular DNA and proteins released under elevated apoptosis rates scaffolds the formation of multi-group collectives \citep{gulli2019evolution}.
+Separately, incomplete cell separation mediated by the same mutational pathway has also been observed to evolve in response to selection for extracellular sucrose digestion at low population densities \citep{koschwanez2013improved}.
+
+A wealth of mathematical models spanning both reductive and agent-based approaches have been developed to describe evolution of multicellularity and cellular specialization \cite{hanschen2015evolutionary}.
+Recent work by Staps and collaborators exemplifies the increasing mechanistic nuance of contemporary computational models.
+They present a mechanistic, agent-based system in which cells evolve weights for a Boolean gene regulatory network with two inputs (representing environmental state), two hidden nodes (representing regulatory state), and two outputs that control reproduction rate and probability of dissociation from or association into a group (representing gene products).
+Evolutionary runs reveal how ecological conditions, such as predation pressure, constraints on diffusion of nutrients/waste, and changing environmental conditions, influence multicellular evolutionary outcomes with respect to group size, group lifespan, group fertility, and cell fate \citep{staps2019emergence}.
+Staps et al. identify further augmentation of the mechanistic capabilities of their agents --- particularly the capacity to establish explicit spatial spatial structure within groups and sense local state --- as a compelling target for future work.
+
+Heather Goldsby and collaborators' deme-based work is illustrative of the artificial life approach, where focal structures and processes realize conceptual analogy to (but not necessarily direct representation of) biological reality.
+In this string of studies, spatially-segregated pockets of cells (``demes'') compete for space in a fixed-size population of demes.
+Individual cells are controlled by self-replicating Avida-style computer programs with special instructions that allow them to interact with their environment and with neighboring cells.
+The free-form paradigm of the genetic programming substrate, theoretically capable of performing arbitrary computation, enables the evolution of agents exhibiting the advanced behavioral capacities proposed by Staps et al., albeit in a manner without direct mechanistic analogy to biological cells.
+Two modes of reproduction are defined under the deme model: within-deme and deme-founding.
+In the first, a cell copies itself into a neighboring toroidal tile within its deme.
+In the second, a deme slot is cleared in the deme population then seeded with a single cell from the parent deme.
+Cells grow freely within demes, but deme fecundity depends on the collective profile of computational tasks (e.g., logic functions) performed within the deme.
+This setup mirrors the dynamics of biological multicellularity, in which cell proliferation may either grow an existing multicellular body or spawn a new multicellular body.
+Notably, when task-switching costs are applied Goldsby et al. have observed the evolution of division of labor and extensive functional interdependence within demes \citep{goldsby2012task}.
+When mutagenic side-effects are applied Goldsby et al. have observed the evolution of germ-soma differentiation \citep{goldsby2014evolutionary}.
+
 \subsection{Resource Collection Process} \label{sup:resource_collection_process}
 
 Resource appears at a single point then spreads outwards update-by-update in a diamond-shaped wave. The expanding wave halts at a predefined limit.
