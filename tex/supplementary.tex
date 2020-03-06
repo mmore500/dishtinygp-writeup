@@ -447,16 +447,9 @@ We implemented our experimental system using the Empirical library for scientifi
 The code used to perform and analyze our experiments, our figures, data from our experiments, and a live in-browser demo of our system is available via the Open Science Framework at \url{https://osf.io/g58xk/}.
 Most replicates finished within a day, but some took up to a week to complete.
 
-\subsection{Reproductive Cooperation} \label{sec:reproductive-cooperation}
+\subsection{Reproductive Cooperation} \label{sup:reproductive-cooperation}
 
 \input{fig/reproduction_surrounded.tex}
-
-In the case of an evolutionary transition of individuality, we would expect cells to modulate their own reproductive behavior to align with group interests.
-In this environment, cell reproduction inherently antagonizes immediate neighbors so in the case of a transition we would expect somatic growth to occur primarily at group peripheries.
-Figure \ref{fig:reproduction_surrounded} compares cellular reproduction rates between the interior and exterior of highest-level same-channel signaling networks.
-In the nested treatments, this corresponded to the level-one channel and, in the flat treatments where no level-one channel was defined, this corresponded to the level-zero channel.
-For all treatments, phenotypes with depressed interior cellular reproduction rates dominated across replicates (non-overlapping 95\% CI).
-All four treatments appear to be sufficient to select for reproductive cooperation among cells.
 
 \subsection{Resource Sharing} \label{sec:resource-sharing}
 
@@ -480,6 +473,17 @@ In all four treatments, mean sharing to direct-kin highest-level channelmates wa
 This could be due to an evolutionary incentive to favor direct cell kin over other channelmates, group-level selection for asymmetric resource flow achieved by preferential sharing, or some combination of the two.
 However, in all four treatments mean sharing to non-direct-kin highest-level channelmates was also significantly greater than resource sharing to unrelated neighbors (non-overlapping 95\% CI).
 Thus, all four treatments appear to be sufficient to select for functional cooperation among cells.
+
+\subsection{Case Studies: Life Histories} \label{sec:life-histories}
+
+Although cooperative cell-level phenotypes were common among evolved same-channel signaling networks, across replicates functional and reproductive cooperation arose by a diverse set of qualitative life histories.
+\input{fig/lifecycle.tex}
+
+Figure \ref{fig:lifecycle} compares four life histories evolved under the Nested-Wave treatment.
+Example \ref{fig:lifecycle-naive} profiles a naive life history in which --- beyond the cellular progenitor of a propagule group --- the parent and propagule groups exhibit no special cooperative relationship.
+In example \ref{fig:lifecycle-adjoin}, propagules repeatedly bud off of parent groups to yield a larger network of persistent parent-child cooperators.
+In example \ref{fig:lifecycle-sweep}, propagules are generated at the extremities of parent groups and then rapidly replace most or all of the parent group.
+Finally, in example \ref{fig:lifecycle-burst}, propagules are generated at the interior of a parent group and replace it from the inside out.
 
 \subsection{Case Study: Gradient-conditioned Cell Behavior} \label{sec:gradient-conditioned-behavior}
 
