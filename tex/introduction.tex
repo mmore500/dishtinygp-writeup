@@ -9,23 +9,26 @@ Multicellular organisms and eusocial insect colonies exemplify this phenomenon \
 Both are sustained and propagated through the cooperation of lower-level kin.
 Although not our focus here, egalitarian transitions --- events in which non-kin unite, such as the genesis of mitochondria by symbiosis of free-living prokaryotes and eukaryotes \citep{smith1997major} --- also constitute essential episodes in natural history.
 
-Because in nature major transitions typically occur rarely and over vast time scales, they are challenging to study.
+In nature, major transitions occur rarely and over vast time scales, making them challenging to study.
 Recent work in experimental evolution \citep{ratcliff2014experimental, ratcliff2015origins, gulli2019evolution, koschwanez2013improved}, mechanistic modeling \citep{hanschen2015evolutionary, staps2019emergence}, and artificial life \citep{goldsby2012task, goldsby2014evolutionary} complements traditional post hoc approaches focused on characterizing the record of natural history.
-Made possible by these systems' instantiative nature, experimental manipulations affecting the evolutionary transition process itself shed special light on the requisites, mechanisms, and evolutionary consequences of fraternal transitions.
+These systems each instantiate the evolutionary transition process, allowing targeted manipulations to test hypotheses about the requisites, mechanisms, and evolutionary consequences of fraternal transitions.
 
-Our work here follows closely in the intellectual vein of Goldsby's deme-based artificial life experiments.
-In her string of studies, spatially-segregated pockets of cells (``demes'') compete for space in a fixed-size population of demes.
-Individual cells are controlled by self-replicating Avida-style computer programs with special instructions that allow them to interact with their environment and with neighboring cells.
-Two modes of reproduction are defined under the deme model: within-deme and deme-founding.
-In the first, a cell copies itself into a neighboring toroidal tile within its deme.
-In the second, a deme slot is cleared in the deme population to make space for a daughter deme and then seeded with a single cell from the parent deme.
-Cells grow freely within demes, but deme fecundity depends on the collective profile of computational tasks (e.g., logic functions) performed within the deme.
-This setup mirrors the dynamics of biological multicellularity, in which cell proliferation may either grow an existing multicellular body or spawn a new multicellular body.
+Our work here follows closely in the intellectual vein of Goldsby's deme-based artificial life experiments \citep{goldsby2012task, goldsby2014evolutionary}.
+In her studies, organisms exist as a group of cells in a segregated, fixed-size subspace.
+Organisms compete for a limited number of population slots.
+Cells within organisms are controlled by a heritable computer program that can allow them to self-replicate, interact with their environment, and communicate with neighboring cells.
 
-However, we pursue a unified spatial model in which group-level individuality emerges implicitly in terms of the actions of individual cells rather than explicitly in terms of an explicit algorithmic distinction between discrete spatial scales.
-In our view, the merit and significance of such a distinction on purely philosophical grounds is dubious.
-More concretely, however, we hope that a unified spatial approach will enable more nuanced interactions between emergent individuals, which may interface in terms of many immediate cell-cell interfaces instead of a single deme-deme interface.
-We conjeture that such cell-cell interfaces may promote the continued evolution of novelty in terms of interactions between competitors, interactions between daughter and parent groups, and, if nested hierarchical individuality were to emerge, fundamentally different organismal building blocks at each level.
+Two modes of cellular reproduction are defined: tissue accretion and offspring generation.
+In the former, a cell copies itself into a neighboring position within its subspace.
+In the latter, a population slot is cleared to make space for a daughter organism then seeded with a single daughter cell from the parent organism.
+Cells grow freely within an organism, but fecundity depends on the collective profile of computational tasks (e.g., logic functions) performed within the organism.
+This setup mirrors the dynamics of biological multicellularity, in which cell proliferation may either grow an existing multicellular body or found a new multicell.
+
+
+Here we demonstrate the emergence of multicellularity in a spatially-unified model, rather than enforcing higher-level organisms to exist by providing explicitly segregated subspaces.
+We expect that the ability to conduct experiments to study major transitions where all aspects of that transition must occur through a natural mechanism will provide us with much deeper insights as to how these transitions may occur in nature.
+We expect that a unified spatial approach will enable more nuanced interactions between emergent individuals, which may interface in terms of many immediate cell-cell interfaces instead of a single deme-deme interface.
+We conjecture that cell-cell interfaces between emergent units of individuality may promote the continued evolution of novelty in terms of interactions between competitors, interactions between daughter and parent groups, and, if nested hierarchical individuality were to emerge, fundamentally different building blocks at each level.
 
 To induce fraternal transitions of individuality within a unified spatial realm, we reward explicitly-registered hereditary groups for cooperation on a distributed resource-collection task.
 Here, we extend previous work exploring the selective implications of this scheme by evolving parameters for manually-designed cell-level strategies \citep{moreno2019toward}.
